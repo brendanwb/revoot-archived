@@ -6,6 +6,20 @@ describe "Static pages" do
   # by telling RSpec that page is the subject of all the tests
   subject { page }
   
+  # RSpec supports a facility called shared examples to eliminate
+  # the kind of duplication seen testing for h1 and title in Home page, 
+  # Help page, About page and Contact page tests here.
+  shared_examples_for "all static pages" do
+    # using a variant of the it method to collapse the code and 
+    # description into one line like below
+    # all hashes have been changed from :text => 'Help' to new 1.9.3 simplified
+    # text: 'Help' style.
+    it { should have_selector('h1',    text: heading) }
+    # full_title is used just like in the helper for the actual view.  It is 
+    # stored in spec/support/utilities.rb and is available to all RSpec tests
+    it { should have_selector('title', text: full_title(page_title)) }
+  end
+  
   describe "Home page" do
     
     # example of old test to compare to updated tests below
@@ -18,40 +32,52 @@ describe "Static pages" do
     # root_path in each test
     before { visit root_path }
     
-    # using a variant of the it method to collapse the code and 
-    # description into one line like below
-    it { should have_selector('h1', text: 'Revoot') }
-    # full_title is used just like in the helper for the actual view.  It is 
-    # stored in spec/support/utilities.rb and is available to all RSpec tests
-    it { should have_selector('title', text: full_title('')) }
+    # let is used to create local variables to be used in testing
+    let(:heading)    { 'Revoot' }
+    let(:page_title) { '' }
+    
+    it_should_behave_like "all static pages"
     it { should_not have_selector('title', text: '| Home') }
   end
   
   describe "Help page" do
 
     before { visit help_path }
+    let(:heading)    { 'Help' }
+    let(:page_title) { 'Help' }
 
-    # the line "should have content 'Help'" do was removed as a result of
-    # adding the subject { page } to the beginning of the page. brackets
-    # are used instead of a do end block
-    # all hashes have been changed from :text => 'Help' to new 1.9.3 simplified
-    # text: 'Help' style.
-    it { should have_selector('h1', text: 'Help') }
-    it { should have_selector('title', text: full_title('Help')) }
+    it_should_behave_like "all static pages"
   end
   
   describe "About page" do
     
     before { visit about_path }
+    let(:heading)    { 'About Us' }
+    let(:page_title) { 'About Us' }
     
-    it { should have_selector('h1', :text => 'About Us') }
-    it { should have_selector('title', text: full_title('About Us')) }
+    it_should_behave_like "all static pages"
   end
   
   describe "Contact page" do
     before { visit contact_path }
-    it { should have_selector('h1', text: 'Contact') }
-    it { should have_selector('title', text: full_title('Contact')) }
+    let(:heading)    { 'Contact' }
+    let(:page_title) { 'Contact' }
+    
+    it_should_behave_like "all static pages"
+  end
+  
+  it "should have the right links on the layout" do
+    visit root_path
+    click_link "About"
+    page.should have_selector 'title', text: full_title('About Us')
+    click_link "Help"
+    page.should have_selector 'title', text: full_title('Help')    
+    click_link "Contact"
+    page.should have_selector 'title', text: full_title('Contact')
+    click_link "Home"
+    page.should have_selector 'title', text: full_title('')
+    click_link "Sign up now!"
+    page.should have_selector 'title', text: full_title('Sign up now!')
   end
   
 end
