@@ -1,5 +1,5 @@
 RevootApp::Application.routes.draw do
-  get "users/new"
+  resources :users
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
