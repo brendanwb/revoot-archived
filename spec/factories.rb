@@ -9,4 +9,27 @@ FactoryGirl.define do
       admin true
     end
   end
+  
+  factory :tv_show do
+    tvdb_id "79349"
+    name "Dexter"
+    year 2006
+    network "Showtime"
+    genre "Action"
+  end
+  
+  factory :episode do
+    tv_show
+    tvdb_id "307473"
+    name "Dexter"
+    season_num "1"
+    episode_num "1"
+    first_aired "2006-10-01"
+  end
+  
+  factory :episode_tracker do
+    user
+    episode
+    watched true
+  end
 end

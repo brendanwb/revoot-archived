@@ -52,10 +52,20 @@ describe "User pages" do
   
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
+    let(:tv_show) { FactoryGirl.create(:tv_show) }
+    let(:episode_1) { FactoryGirl.create(:episode) }
+    let(:episode_2) { FactoryGirl.create(:episode, tv_show: tv_show, tvdb_id: "307474", name: "Who Knows", season_num: "1", episode_num: "2", first_aired: "2006-10-08") }
+    let!(:t1) { FactoryGirl.create(:episode_tracker, user: user, episode: episode_1, watched: 1) }
+
     before { visit user_path(user) }
     
     it { should have_selector('h1',    text: user.name) }
     it { should have_selector('title', text: user.name) }
+
+    describe "show trackers" do
+      it { should have_content(t1.watched) }
+      it { should have_content(user.episode_trackers.count) }
+    end
   end
   
   describe "signup page" do

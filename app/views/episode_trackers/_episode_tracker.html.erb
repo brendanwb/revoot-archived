@@ -1,0 +1,13 @@
+<li>
+  <% episode = Episode.where(id: episode_tracker.episode_id).first %>
+  <% tv_show = TvShow.where(id: episode.tv_show_id).first %>
+  <span class="content"><%= tv_show.name %>:</span>
+  <span class="content"><%= episode.name %>,</span>
+  <span class="content">Season: <%= episode.season_num %>,</span>
+  <span class="content">Episode: <%= episode.episode_num %> - </span>
+  <% if episode_tracker.watched %> 
+  <i class="icon-ok"></i> 
+  <% else %>
+  <i class="icon-ban-circle"></i>
+  <% end %>
+</li>

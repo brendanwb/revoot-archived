@@ -11,7 +11,47 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522211221) do
+ActiveRecord::Schema.define(:version => 20120822193507) do
+
+  create_table "episode_trackers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "episode_id"
+    t.boolean  "watched"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "episode_trackers", ["user_id", "episode_id"], :name => "index_show_trackers_on_user_id_and_episode_id"
+
+  create_table "episodes", :force => true do |t|
+    t.integer  "tv_show_id"
+    t.string   "tvdb_id"
+    t.string   "name"
+    t.string   "season_num"
+    t.string   "episode_num"
+    t.string   "first_aired"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "episodes", ["tv_show_id"], :name => "index_episodes_on_tv_show_id"
+
+  create_table "tv_shows", :force => true do |t|
+    t.string   "tvdb_id"
+    t.string   "name"
+    t.string   "year"
+    t.string   "network"
+    t.string   "genre"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tv_shows", ["tvdb_id"], :name => "index_tv_shows_on_tvdb_id", :unique => true
+
+  create_table "tv_shows_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "tv_show_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -19,7 +19,6 @@ describe User do
   
   subject { @user }
   
-  it { should respond_to(:name) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
@@ -27,12 +26,15 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:tv_shows) }
+  it { should respond_to(:episodes) }
+  it { should respond_to(:episode_trackers) }
   
   it { should be_valid }
   it { should_not be_admin}
   
   describe "with admin attribute set to 'true" do
-    before { @user.toggle!(:admin) }
+    before { @user.toggle(:admin) }
     
     it { should be_admin }
   end
@@ -130,5 +132,47 @@ describe User do
       end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end
+  
+  describe "episode_tracker associations" do
+    
+    before { @user.save }
+    let!(:episode_tracker_first) do
+      FactoryGirl.create(:episode_tracker, user: @user, episode_id:5)
+    end
+
+    let!(:episode_tracker_second) do
+      FactoryGirl.create(:episode_tracker, user: @user, episode_id:3)
+    end
+
+    it "should show all the episode trackers for a given user" do
+      @user.episode_trackers.should == [episode_tracker_second,episode_tracker_first]
+    end
+    
+    let(:episode_tracker) do
+      @user.episode_trackers.first
+    end
+    
+    it "should just contain the first episode tracker in the array" do
+      episode_tracker.should == episode_tracker_second
+    end
+    
+    let(:episode_tracker_by_ep) do
+      @user.episode_trackers.where(episode_id:"5").first
+    end
+    
+    it "should contain the episode tracker with the episode_id set to 5" do
+      episode_tracker_by_ep.should == episode_tracker_first
+    end
+
+    it "should destroy associated episode_trackers" do
+      episode_trackers = @user.episode_trackers
+      @user.destroy
+      episode_trackers.each do |episode_tracker|
+        EpisodeTracker.find_by_id(episode_tracker.id).should be_nil
+      end
+    end
+  end
+  
+
   
 end

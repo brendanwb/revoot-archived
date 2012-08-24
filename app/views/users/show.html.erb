@@ -8,4 +8,12 @@
       </h1>
     </section>
   </aside><!-- <aside class="span4"> -->
+  <div class="span8">
+    <% if @user.episode_trackers.any? %>
+      <h3>Episodes Watched (<%= @user.episode_trackers.count %>)</h3>
+      <ul class="episodes">
+      	<%= render @episode_trackers %>
+      </ul>
+    <% end %>
+  </div> <!-- <div class="span8"> -->
 </div><!-- <div class="row"> -->
