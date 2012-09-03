@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: tv_shows
+#
+#  id         :integer         not null, primary key
+#  tvdb_id    :string(255)
+#  name       :string(255)
+#  year       :string(255)
+#  network    :string(255)
+#  genre      :string(255)
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#
+
 require 'spec_helper'
 
 describe TvShow do
@@ -66,3 +80,5 @@ describe TvShow do
   end
   
 end
+
+
