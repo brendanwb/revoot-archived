@@ -16,9 +16,10 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   has_secure_password
   has_many :episode_trackers, dependent: :destroy
-  has_many :episodes, :through => :episode_trackers
-  has_and_belongs_to_many :tv_shows
-  
+  has_many :episodes, through: :episode_trackers
+  has_many :relationships, dependent: :destroy
+  has_many :followed_shows, through: :relationships, source: :tv_show
+
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
   
@@ -28,8 +29,19 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }         
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  def following_show?(tv_show)
+    relationships.find_by_tv_show_id(tv_show.id)
+  end
   
-  
+  def follow_show!(tv_show)
+    relationships.create!(tv_show_id: tv_show.id)
+  end
+
+  def unfollow_show!(tv_show)
+    relationships.find_by_tv_show_id(tv_show.id).destroy
+  end
+
   private
   
     def create_remember_token

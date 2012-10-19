@@ -28,6 +28,7 @@ describe TvShow do
   it { should respond_to(:network) }
   it { should respond_to(:genre) }
   it { should respond_to(:episodes) }
+  it { should respond_to(:tv_show_followers) }
   
   describe "episode associations" do
     
@@ -77,6 +78,16 @@ describe TvShow do
   describe "with name that is too long" do
     before { @tv_show.name = "a" * 101 }
     it { should_not be_valid }
+  end
+
+  describe "user followers" do
+    let(:user_follower) { FactoryGirl.create(:user) }
+    before do
+      @tv_show.save
+      user_follower.follow_show!(@tv_show)
+    end
+
+    its(:tv_show_followers) { should include(user_follower) }
   end
   
 end

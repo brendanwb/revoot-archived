@@ -29,12 +29,16 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
-  it { should respond_to(:tv_shows) }
   it { should respond_to(:episodes) }
   it { should respond_to(:episode_trackers) }
+  it { should respond_to(:relationships) }
+  it { should respond_to(:followed_shows) }
+  it { should respond_to(:following_show?) }
+  it { should respond_to(:follow_show!) }
+  it { should respond_to(:unfollow_show!) }
   
   it { should be_valid }
-  it { should_not be_admin}
+  it { should_not be_admin }
   
   describe "with admin attribute set to 'true" do
     before do
@@ -171,11 +175,30 @@ describe User do
     end
 
     it "should destroy associated episode_trackers" do
-      episode_trackers = @user.episode_trackers
+      episode_trackers = @user.episode_trackers.dup
       @user.destroy
+      episode_trackers.should_not be_empty
       episode_trackers.each do |episode_tracker|
         EpisodeTracker.find_by_id(episode_tracker.id).should be_nil
       end
+    end
+  end
+
+  describe "following tv_show" do
+    let(:tv_show_followed) { FactoryGirl.create(:tv_show) }
+    before do
+      @user.save
+      @user.follow_show!(tv_show_followed)
+    end
+
+    it { should be_following_show(tv_show_followed) }
+    its(:followed_shows) { should include(tv_show_followed) }
+
+    describe "and unfollowing" do
+      before { @user.unfollow_show!(tv_show_followed) }
+
+      it { should_not be_following_show(tv_show_followed) }
+      its(:followed_shows) { should_not include(tv_show_followed) }
     end
   end
   

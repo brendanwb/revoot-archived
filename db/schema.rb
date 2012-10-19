@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822193507) do
+ActiveRecord::Schema.define(:version => 20121018195112) do
 
   create_table "episode_trackers", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(:version => 20120822193507) do
   end
 
   add_index "episodes", ["tv_show_id"], :name => "index_episodes_on_tv_show_id"
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "tv_show_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "relationships", ["tv_show_id"], :name => "index_relationships_on_tv_show_id"
+  add_index "relationships", ["user_id", "tv_show_id"], :name => "index_relationships_on_user_id_and_tv_show_id", :unique => true
+  add_index "relationships", ["user_id"], :name => "index_relationships_on_user_id"
 
   create_table "tv_shows", :force => true do |t|
     t.string   "tvdb_id"
