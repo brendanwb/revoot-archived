@@ -59,7 +59,13 @@ namespace :db do
       watch = watched.shuffle.pop
       users.each { |user| user.episode_trackers.create!(episode_id: ep_num,watched: watch) }
     end
+
+   
+    tv_shows = TvShow.all
+    user  = User.first
+    tv_shows.each { |followed| user.follow_show!(followed) }
     
   end
-    
+
+
 end

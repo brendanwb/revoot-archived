@@ -1,0 +1,7 @@
+<div id="follow_form">
+	<% if current_user.following_show?(@tv_show) %>
+	  <%= render 'unfollow_tv_show' %>
+  <% else %>
+  	<%= render 'follow_tv_show' %>
+	<% end %>
+</div>

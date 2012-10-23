@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
   
   factory :tv_show do
-    tvdb_id "79349"
+    sequence(:tvdb_id) { |n| "#{n}"}
     name "Dexter"
     year 2006
     network "Showtime"

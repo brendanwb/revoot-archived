@@ -1,6 +1,16 @@
 RevootApp::Application.routes.draw do
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+
+  resources :users do
+    member do
+      get :followed_shows
+    end
+  end
+  resources :tv_shows do
+    member do
+      get :tv_show_followers
+    end
+  end
+  resources :sessions,      only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
 
   # You can have the root of your site routed with "root"
@@ -12,6 +22,9 @@ RevootApp::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  match 'tv',   to: 'tv_shows#index'
+
+  # get "tv_shows/show"
 
   # See how all your routes lay out with "rake routes"
 

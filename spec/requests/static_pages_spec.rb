@@ -66,6 +66,28 @@ describe "Static pages" do
     it_should_behave_like "all static pages"
   end
   
+  describe "for signed-in users" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in user
+      visit root_path
+    end
+
+    # it "should render the user's feed" do
+    #   user.f
+    # end
+
+    describe "followed_show counts" do
+      let(:tv_show) { FactoryGirl.create(:tv_show) }
+      before do
+        user.follow_show!(tv_show)
+        visit root_path
+      end
+
+      it { should have_link("1 TV Show Followed", href:user_path(user)) }
+    end
+  end
+
   it "should have the right links on the layout" do
     visit root_path
     click_link "About"

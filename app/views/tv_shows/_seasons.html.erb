@@ -1,0 +1,11 @@
+
+  
+
+		<% if $current_season != seasons.season_num %>
+			<h2>Season: <%= seasons.season_num %></h2>
+      <li><%= seasons.name %>: Ep. <%= seasons.episode_num %></li>
+			<% $current_season = seasons.season_num %>
+		<% else %>
+      <li><%= seasons.name %>: Ep. <%= seasons.episode_num %></li>
+			<% $current_season = seasons.season_num %>
+		<% end %>

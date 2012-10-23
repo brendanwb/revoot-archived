@@ -59,6 +59,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def followed_shows
+    redirect_to users_path
+  end
+
   private
   
     def signed_in_user
