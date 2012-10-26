@@ -10,8 +10,9 @@ RevootApp::Application.routes.draw do
       get :tv_show_followers
     end
   end
+  resources :episodes
   resources :sessions,      only: [:new, :create, :destroy]
-  resources :relationships, only: [:create, :destroy]
+  resources :tv_relationships, only: [:create, :destroy]
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
@@ -22,7 +23,7 @@ RevootApp::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
-  match 'tv',   to: 'tv_shows#index'
+  match 'tv',       to: 'tv_shows#index'
 
   # get "tv_shows/show"
 

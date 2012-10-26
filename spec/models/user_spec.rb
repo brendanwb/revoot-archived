@@ -31,7 +31,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:episodes) }
   it { should respond_to(:episode_trackers) }
-  it { should respond_to(:relationships) }
+  it { should respond_to(:tv_relationships) }
   it { should respond_to(:followed_shows) }
   it { should respond_to(:following_show?) }
   it { should respond_to(:follow_show!) }

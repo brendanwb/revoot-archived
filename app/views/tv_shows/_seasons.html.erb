@@ -1,11 +1,24 @@
 
-  
-
-		<% if $current_season != seasons.season_num %>
+		<% tracker = current_user.episode_trackers.where(episode_id: seasons.id).first if signed_in? %>
+ 		<% if $current_season != seasons.season_num %>
 			<h2>Season: <%= seasons.season_num %></h2>
-      <li><%= seasons.name %>: Ep. <%= seasons.episode_num %></li>
+      <li>
+      	<span class="content"><%= seasons.name %>: Ep. <%= seasons.episode_num %></span>
+			  <% if tracker.watched %> 
+			    <i class="icon-ok"></i> 
+			  <% else %>
+			    <i class="icon-ban-circle"></i>
+			  <% end %>
+      </li>
 			<% $current_season = seasons.season_num %>
 		<% else %>
-      <li><%= seasons.name %>: Ep. <%= seasons.episode_num %></li>
+      <li>
+      	<span class="content"><%= seasons.name %>: Ep. <%= seasons.episode_num %></span>
+			  <% if tracker.watched %> 
+			    <i class="icon-ok"></i> 
+			  <% else %>
+			    <i class="icon-ban-circle"></i>
+			  <% end %>
+      </li>
 			<% $current_season = seasons.season_num %>
 		<% end %>

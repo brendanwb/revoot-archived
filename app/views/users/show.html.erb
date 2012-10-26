@@ -6,14 +6,14 @@
         <%= gravatar_for @user, size: 60 %>
         <%= @user.name %>	
       </h1>
+      <%= render 'shared/stats' %>
     </section>
   </aside><!-- <aside class="span4"> -->
   <div class="span8">
-    <% if @user.episode_trackers.any? %>
-      <h3>Episodes Watched (<%= @user.episode_trackers.count %>)</h3>
-      <ul class="episodes">
-      	<%= render @episode_trackers %>
-      </ul>
+    <% if @user.followed_shows.any? %>
+      <h3>TV Shows Followed (<%= @user.followed_shows.count %>)</h3>
+        <% $current_show = "" %>
+        <%= render :partial => 'tv_shows/my_tv_shows', :collection => @my_tv_shows %>
     <% end %>
   </div> <!-- <div class="span8"> -->
 </div><!-- <div class="row"> -->

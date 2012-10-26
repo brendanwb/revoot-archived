@@ -17,8 +17,8 @@ class TvShow < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 100 }
   
   has_many :episodes, dependent: :destroy
-  has_many :relationships, dependent: :destroy
-  has_many :tv_show_followers, through: :relationships, source: :user
+  has_many :tv_relationships, dependent: :destroy
+  has_many :tv_show_followers, through: :tv_relationships, source: :user
   
 end
 

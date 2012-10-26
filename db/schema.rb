@@ -36,16 +36,16 @@ ActiveRecord::Schema.define(:version => 20121018195112) do
 
   add_index "episodes", ["tv_show_id"], :name => "index_episodes_on_tv_show_id"
 
-  create_table "relationships", :force => true do |t|
+  create_table "tv_relationships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "tv_show_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "relationships", ["tv_show_id"], :name => "index_relationships_on_tv_show_id"
-  add_index "relationships", ["user_id", "tv_show_id"], :name => "index_relationships_on_user_id_and_tv_show_id", :unique => true
-  add_index "relationships", ["user_id"], :name => "index_relationships_on_user_id"
+  add_index "tv_relationships", ["tv_show_id"], :name => "index_tv_relationships_on_tv_show_id"
+  add_index "tv_relationships", ["user_id", "tv_show_id"], :name => "index_tv_relationships_on_user_id_and_tv_show_id", :unique => true
+  add_index "tv_relationships", ["user_id"], :name => "index_tv_relationships_on_user_id"
 
   create_table "tv_shows", :force => true do |t|
     t.string   "tvdb_id"

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @episode_trackers = @user.episode_trackers
+    @my_tv_shows = @user.followed_shows
   end
   
   def new
@@ -59,9 +59,9 @@ class UsersController < ApplicationController
     end
   end
   
-  def followed_shows
-    redirect_to users_path
-  end
+  # def followed_shows
+  #   redirect_to users_path
+  # end
 
   private
   

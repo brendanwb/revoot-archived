@@ -52,7 +52,7 @@ namespace :db do
     end
   
     users = User.all(limit: 6)
-    episode_nums = (1..2201).to_a
+    episode_nums = (1..2189).to_a
     watched = [0,1]
     50.times do
       ep_num = episode_nums.shuffle.pop

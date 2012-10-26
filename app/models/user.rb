@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :episode_trackers, dependent: :destroy
   has_many :episodes, through: :episode_trackers
-  has_many :relationships, dependent: :destroy
-  has_many :followed_shows, through: :relationships, source: :tv_show
+  has_many :tv_relationships, dependent: :destroy
+  has_many :followed_shows, through: :tv_relationships, source: :tv_show
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
@@ -31,15 +31,19 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   def following_show?(tv_show)
-    relationships.find_by_tv_show_id(tv_show.id)
+    tv_relationships.find_by_tv_show_id(tv_show.id)
   end
   
   def follow_show!(tv_show)
-    relationships.create!(tv_show_id: tv_show.id)
+    tv_relationships.create!(tv_show_id: tv_show.id)
+    episodes = tv_show.episodes
+    episodes.each do |episode|
+      episode_trackers.create!(episode_id: episode.id, watched: 0)
+    end
   end
 
   def unfollow_show!(tv_show)
-    relationships.find_by_tv_show_id(tv_show.id).destroy
+    tv_relationships.find_by_tv_show_id(tv_show.id).destroy
   end
 
   private
