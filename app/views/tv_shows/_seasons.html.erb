@@ -1,23 +1,32 @@
 
 		<% tracker = current_user.episode_trackers.where(episode_id: seasons.id).first if signed_in? %>
+
  		<% if $current_season != seasons.season_num %>
 			<h2>Season: <%= seasons.season_num %></h2>
       <li>
       	<span class="content"><%= seasons.name %>: Ep. <%= seasons.episode_num %></span>
-			  <% if tracker.watched %> 
-			    <i class="icon-ok"></i> 
-			  <% else %>
-			    <i class="icon-ban-circle"></i>
+			  <% if signed_in? %>
+				  <% if !tracker.nil? %>
+					  <% if tracker.watched %> 
+					    <i class="icon-ok"></i> 
+					  <% else %>
+					    <i class="icon-ban-circle"></i>
+					  <% end %>
+					<% end %>
 			  <% end %>
       </li>
 			<% $current_season = seasons.season_num %>
 		<% else %>
       <li>
       	<span class="content"><%= seasons.name %>: Ep. <%= seasons.episode_num %></span>
-			  <% if tracker.watched %> 
-			    <i class="icon-ok"></i> 
-			  <% else %>
-			    <i class="icon-ban-circle"></i>
+			  <% if signed_in? %>
+				  <% if !tracker.nil? %>
+					  <% if tracker.watched %> 
+					    <i class="icon-ok"></i> 
+					  <% else %>
+					    <i class="icon-ban-circle"></i>
+					  <% end %>
+					<% end %>
 			  <% end %>
       </li>
 			<% $current_season = seasons.season_num %>
