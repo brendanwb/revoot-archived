@@ -1,0 +1,9 @@
+<% if current_user.following_show?(@tv_show) %>
+	<div id="episode_form_<%= $curr_episode.id %>">
+	  <% if current_user.watched_episode?($curr_episode) %> 
+	    <%= render 'watched_episode' %>
+	  <% else %>
+	    <%= render 'unwatched_episode' %>
+	  <% end %>
+	</div>
+<% end %>

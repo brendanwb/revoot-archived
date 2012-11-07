@@ -1,2 +1,2 @@
 // This uses jQuery to update the follower with AJAX.  render changes the button
-$("#follow_form").html("<%= escape_javascript(render('tv_shows/unfollow_tv_show')) %>")
+$("#follow_form_<%= $curr_show.id %>").html("<%= escape_javascript(render('tv_shows/unfollow_tv_show')) %>")

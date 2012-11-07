@@ -1,3 +1,4 @@
+
 <% provide(:title, @tv_show.name)%>
 <div class="row">
   <aside class="span4">
@@ -21,8 +22,10 @@
         Seasons
       </h3>
       <% if @tv_show.episodes.any? %>
-        <% $current_season = 0 %>
+              <% $current_season = 0 %>
+      <div id="seasons">
         <%= render partial: 'seasons', collection: @seasons %>
+      </div><!-- seasons -->
       <% end %>
     </section>
   </div> <!-- <div class="span8"> -->

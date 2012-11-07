@@ -6,7 +6,7 @@ class TvRelationshipsController < ApplicationController
 		current_user.follow_show!(@tv_show)
 		respond_to do |format|
 			format.html {redirect_to @tv_show}
-			format.js
+			format.js {$curr_show = @tv_show}
 		end
 	end
 
@@ -15,7 +15,7 @@ class TvRelationshipsController < ApplicationController
 		current_user.unfollow_show!(@tv_show)
 		respond_to do |format|
 			format.html {redirect_to @tv_show}
-			format.js
+			format.js {$curr_show = @tv_show}
 		end
 	end
 

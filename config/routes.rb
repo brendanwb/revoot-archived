@@ -13,6 +13,7 @@ RevootApp::Application.routes.draw do
   resources :episodes
   resources :sessions,      only: [:new, :create, :destroy]
   resources :tv_relationships, only: [:create, :destroy]
+  resources :episode_trackers, only: [:update]
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

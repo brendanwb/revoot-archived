@@ -44,6 +44,27 @@ class User < ActiveRecord::Base
 
   def unfollow_show!(tv_show)
     tv_relationships.find_by_tv_show_id(tv_show.id).destroy
+    episodes = Episode.where(tv_show_id: tv_show.id)
+    episodes.each do |episode|
+      episode_trackers.find_by_episode_id(episode.id).destroy
+    end
+  end
+
+  def watched_episode?(episode)
+    @tracker = episode_trackers.find_by_episode_id(episode.id)
+    @tracker.watched
+  end
+
+  def watch_episode!(episode)
+    @tracker = episode_trackers.find_by_episode_id(episode.id)
+    @tracker.watched = true
+    @tracker.save
+  end
+
+  def unwatch_episode!(episode)
+    @tracker = episode_trackers.find_by_episode_id(episode.id)
+    @tracker.watched = false
+    @tracker.save
   end
 
   private

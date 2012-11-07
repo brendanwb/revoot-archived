@@ -28,9 +28,9 @@ describe "Tv Show Pages" do
 		it { should have_selector('p',      text: single_tv_show.year.to_s) }
 		it { should have_selector('p',      text: single_tv_show.network) }
 		it { should have_selector('p',      text: single_tv_show.genre) }
-		it { should have_selector('h2',     text: "Seasons") }
+		it { should have_selector('h3',     text: "Seasons") }
 		# it { should have_selector('li',     text: single_tv_show.episodes.first.name) }
-		it { should have_link(user.name, href: user_path(user)) }
+		# it { should have_link(user.name, href: user_path(user)) }
 
 		describe "follow/unfollow buttons" do
       before { sign_in user }

@@ -1,5 +1,8 @@
-<div id="follow_form">
-	<% if current_user.following_show?(@tv_show) %>
+<% # If the the form is created for the show.html page then use @tv_show %>
+<% # else, if the form is from the index.html page use $tv_show %>
+<% @tv_show ? $curr_show = @tv_show : $curr_show = $tv_show %>
+<div id="follow_form_<%= $curr_show.id %>">
+	<% if current_user.following_show?($curr_show) %>
 	  <%= render 'unfollow_tv_show' %>
   <% else %>
   	<%= render 'follow_tv_show' %>
