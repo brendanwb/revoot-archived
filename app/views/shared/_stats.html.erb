@@ -4,10 +4,22 @@
     <strong id="following" class="stat">
       <%= @user.followed_shows.count %>
     </strong>
-    <% if @user.followed_shows.count > 1 %>
+    <% if @user.followed_shows.count > 1 || @user.followed_shows.count == 0 %>
       TV Shows Followed
     <% else %>
       TV Show Followed
+    <% end %>
+  </a>
+</div>
+<div class="stats">
+  <a href="<%= user_path(@user) %>">
+    <strong id="following" class="stat">
+      <%= @user.movies.count %>
+    </strong>
+    <% if @user.movies.count > 1 || @user.movies.count == 0 %>
+      Movies Watched
+    <% else %>
+      Movie Watched
     <% end %>
   </a>
 </div>

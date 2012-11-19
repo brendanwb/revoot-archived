@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :episodes, through: :episode_trackers
   has_many :tv_relationships, dependent: :destroy
   has_many :followed_shows, through: :tv_relationships, source: :tv_show
+  has_many :movies, through: :movie_trackers
+  has_many :movie_trackers, dependent: :destroy
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
@@ -65,6 +67,23 @@ class User < ActiveRecord::Base
     @tracker = episode_trackers.find_by_episode_id(episode.id)
     @tracker.watched = false
     @tracker.save
+  end
+
+  def following_movie?(movie)
+    movie_trackers.find_by_movie_id(movie.id)
+  end
+
+  def follow_movie!(movie)
+    movie_trackers.create!(movie_id: movie.id)
+  end
+
+  def unfollow_movie!(movie)
+    movie_trackers.find_by_movie_id(movie.id).destroy
+  end
+  
+  def watched_movie?(movie)
+    @movie_tracker = movie_trackers.find_by_movie_id(movie.id)
+    @movie_tracker.watched
   end
 
   private

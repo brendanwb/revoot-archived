@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018195112) do
+ActiveRecord::Schema.define(:version => 20121113202813) do
 
   create_table "episode_trackers", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,32 @@ ActiveRecord::Schema.define(:version => 20121018195112) do
   end
 
   add_index "episodes", ["tv_show_id"], :name => "index_episodes_on_tv_show_id"
+
+  create_table "movie_trackers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "movie_id"
+    t.boolean  "watched"
+    t.boolean  "rating"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "movies", :force => true do |t|
+    t.integer  "tmdb_id"
+    t.string   "imdb_id"
+    t.string   "title"
+    t.string   "release_date"
+    t.string   "overview"
+    t.string   "status"
+    t.integer  "run_time"
+    t.string   "production_company"
+    t.string   "language"
+    t.string   "genre"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "movies", ["title"], :name => "index_movies_on_title"
 
   create_table "tv_relationships", :force => true do |t|
     t.integer  "user_id"

@@ -1,0 +1,5 @@
+<h3>
+	<% $movie = movie %>
+  <%= link_to movie.title, movie_path(movie.id) %>
+  <%= render 'follow_movie_form' if signed_in? %>
+</h3>

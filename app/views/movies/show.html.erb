@@ -1,0 +1,30 @@
+<% provide(:title, @movie.title)%>
+<div class="row">
+  <aside class="span4">
+      <h1>
+        <%= @movie.title %>  
+      </h1>
+      <p>
+        Release Date: <%= @movie.release_date %>
+      </p>
+      <p>
+        Release Status: <%= @movie.status %>
+      </p>
+      <p>
+        
+      </p>
+    <%= render 'follow_movie_form' if signed_in? %>
+  </aside><!-- <aside class="span4"> -->
+  <div class="span7">
+    <section>
+      <h3>
+        Overview
+      </h3>
+      <div id="overview">
+      	<p>
+          <%= @movie.overview %>
+        </p>
+      </div><!-- overview -->
+    </section>
+  </div> <!-- <div class="span8"> -->
+</div><!-- <div class="row"> -->

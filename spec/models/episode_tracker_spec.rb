@@ -26,7 +26,9 @@ describe EpisodeTracker do
   it { should respond_to(:episode_id) }
   it { should respond_to(:watched) }
   it { should respond_to(:user) }
+  it { should respond_to(:episode) }
   its(:user) { should == user }
+  its(:episode) { should == episode }
   
   it { should be_valid }
   

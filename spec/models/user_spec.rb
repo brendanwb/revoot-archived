@@ -36,6 +36,14 @@ describe User do
   it { should respond_to(:following_show?) }
   it { should respond_to(:follow_show!) }
   it { should respond_to(:unfollow_show!) }
+  it { should respond_to(:watched_episode?) }
+  it { should respond_to(:watch_episode!) }
+  it { should respond_to(:unwatch_episode!) }
+  it { should respond_to(:movies) }
+  it { should respond_to(:movie_trackers) }
+  it { should respond_to(:following_movie?) }
+  it { should respond_to(:follow_movie!) }
+  it { should respond_to(:unfollow_movie!) }
   
   it { should be_valid }
   it { should_not be_admin }
@@ -202,6 +210,63 @@ describe User do
     end
   end
   
+  describe "movie_tracker associations" do
+    
+    before { @user.save }
+    let!(:movie_tracker_first) do
+      FactoryGirl.create(:movie_tracker, user: @user, movie_id:5)
+    end
 
+    let!(:movie_tracker_second) do
+      FactoryGirl.create(:movie_tracker, user: @user, movie_id:3)
+    end
+
+    it "should show all the movie trackers for a given user" do
+      @user.movie_trackers.should == [movie_tracker_first,movie_tracker_second]
+    end
+    
+    let(:movie_tracker) do
+      @user.movie_trackers.first
+    end
+    
+    it "should just contain the first movie tracker in the array" do
+      movie_tracker.should == movie_tracker_first
+    end
+    
+    let(:movie_tracker_by_movie) do
+      @user.movie_trackers.where(movie_id:5).first
+    end
+    
+    it "should contain the movie tracker with the movie_id set to 5" do
+      movie_tracker_by_movie.should == movie_tracker_first
+    end
+
+    it "should destroy associated movie_trackers" do
+      movie_trackers = @user.movie_trackers.dup
+      @user.destroy
+      movie_trackers.should_not be_empty
+      movie_trackers.each do |movie_tracker|
+        MovieTracker.find_by_id(movie_tracker.id).should be_nil
+      end
+    end
+  end
+
+  describe "following movie" do
+    let(:movie_followed) { FactoryGirl.create(:movie) }
+    before do
+      @user.save
+      @user.follow_movie!(movie_followed)
+    end
+
+    it { should be_following_movie(movie_followed) }
+    its(:movie_trackers) { should_not be_nil }
+
+    describe "and unfollowing" do
+      before { @user.unfollow_movie!(movie_followed) }
+
+      it { should_not be_following_movie(movie_followed) }
+      its(:movie_trackers) { should_not include(movie_followed) }
+    end
+  end
   
 end

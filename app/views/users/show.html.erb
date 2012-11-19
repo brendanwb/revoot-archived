@@ -12,8 +12,12 @@
   <div class="span8">
     <% if @user.followed_shows.any? %>
       <h3>TV Shows Followed (<%= @user.followed_shows.count %>)</h3>
-        <% $current_show = "" %>
         <%= render :partial => 'tv_shows/my_tv_shows', :collection => @my_tv_shows %>
+    <% end %>
+    <hr/>
+    <% if @user.movie_trackers.any? %>
+      <h3>Movies Watched (<%= @user.movie_trackers.count %>)</h3>
+        <%= render :partial=> 'movies/my_movies', :collection => @my_movies  %>
     <% end %>
   </div> <!-- <div class="span8"> -->
 </div><!-- <div class="row"> -->

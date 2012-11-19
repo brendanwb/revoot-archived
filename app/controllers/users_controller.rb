@@ -4,8 +4,9 @@ class UsersController < ApplicationController
   before_filter :admin_user,     only: :destroy
   
   def show
-    @user = User.find(params[:id])
+    @user        = User.find(params[:id])
     @my_tv_shows = @user.followed_shows
+    @my_movies   = @user.movies
   end
   
   def new

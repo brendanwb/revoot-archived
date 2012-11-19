@@ -14,6 +14,8 @@ RevootApp::Application.routes.draw do
   resources :sessions,      only: [:new, :create, :destroy]
   resources :tv_relationships, only: [:create, :destroy]
   resources :episode_trackers, only: [:update]
+  resources :movies
+  resources :movie_trackers, only: [:create, :destroy, :update]
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
@@ -22,11 +24,11 @@ RevootApp::Application.routes.draw do
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
   match '/signup',  to: 'users#new'
+  # match ':name', to: 'users#show', as: 'user_page'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
   match 'tv',       to: 'tv_shows#index'
-
-  # get "tv_shows/show"
+  match 'tv/:id' => 'tv_shows#show', :as => 'tv_show_page'
 
   # See how all your routes lay out with "rake routes"
 

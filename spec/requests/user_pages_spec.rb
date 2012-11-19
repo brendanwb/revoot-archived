@@ -56,6 +56,8 @@ describe "User pages" do
     let(:episode_1) { FactoryGirl.create(:episode) }
     let(:episode_2) { FactoryGirl.create(:episode, tv_show: tv_show, tvdb_id: "307474", name: "Who Knows", season_num: "1", episode_num: "2", first_aired: "2006-10-08") }
     let!(:t1) { FactoryGirl.create(:episode_tracker, user: user, episode: episode_1, watched: 1) }
+    let(:movie) { FactoryGirl.create(:movie) }
+    let!(:mt1) { FactoryGirl.create(:movie_tracker, user: user, movie: movie, watched: 1, rating: 1) }
 
     before { visit user_path(user) }
     
@@ -65,6 +67,10 @@ describe "User pages" do
     describe "show trackers" do
       # it { should have_content(t1.watched) } find a way to test for this
       it { should have_content(user.episode_trackers.count) }
+    end
+
+    describe "movie trackers" do
+      it { should have_content(user.movie_trackers.count) }
     end
 
     describe "follow/unfollow buttons" do
@@ -219,7 +225,7 @@ describe "User pages" do
         visit user_path(user)
       end
 
-      it { should have_link(tv_show.name, href: tv_show_path(tv_show)) }
+      it { should have_link(tv_show.name, href: tv_show_page_path(tv_show)) }
     end
   end  
 end

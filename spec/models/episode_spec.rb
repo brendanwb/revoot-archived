@@ -86,7 +86,7 @@ describe Episode do
     
     before { @episode.save }
     let!(:episode_tracker_first) do
-      FactoryGirl.create(:episode_tracker, user_id: 44, episode: @episode)
+      FactoryGirl.create(:episode_tracker, user_id: 44, episode_id: @episode)
     end
 
     let!(:episode_tracker_second) do
@@ -109,7 +109,7 @@ describe Episode do
       @episode.episode_trackers.where(user_id:12).first
     end
     
-    it "should contain the episode tracker with the user_id set to 44" do
+    it "should contain the episode tracker with the user_id set to 12" do
       episode_tracker_by_ep.should == episode_tracker_second
     end
 

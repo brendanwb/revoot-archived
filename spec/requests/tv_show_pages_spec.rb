@@ -5,12 +5,13 @@ describe "Tv Show Pages" do
 
 	describe "tv shows page" do
 		before(:all) { 30.times { FactoryGirl.create(:tv_show) } }
+    let(:tv_show_test) { FactoryGirl.create(:tv_show) }
 		after(:all) { TvShow.delete_all }
 		before { visit tv_path }
 
 		it { should have_selector("h1",    text: "TV Shows") }
 		it { should have_selector("title", text: full_title("TV Shows"))}
-		# it { should have_selector("h2",    text: tv_show.name)}
+		it { should have_selector("h3",    text: tv_show_test.name)}
 
 	end
 
@@ -20,7 +21,7 @@ describe "Tv Show Pages" do
 
 		before do
 			sign_in user
-			visit tv_show_path(single_tv_show)
+			visit tv_show_page_path(single_tv_show)
 		end
 
 		it { should have_selector('h1',     text: single_tv_show.name) }
@@ -36,7 +37,7 @@ describe "Tv Show Pages" do
       before { sign_in user }
 
       describe "following a tv_show" do
-        before  { visit tv_show_path(single_tv_show)}
+        before  { visit tv_show_page_path(single_tv_show)}
 
         it "should increment the tv_show_followers" do
           expect do
@@ -53,7 +54,7 @@ describe "Tv Show Pages" do
       describe "unfollowing a show" do
         before do
           user.follow_show!(single_tv_show)
-          visit tv_show_path(single_tv_show)
+          visit tv_show_page_path(single_tv_show)
         end
 
         it "should decrement the tv_shows followers count" do

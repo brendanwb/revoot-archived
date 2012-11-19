@@ -1,0 +1,10 @@
+<% # If the form is created for the show.html page then use @tv_show %>
+<% # else, if the form is from the index.html page use $tv_show %>
+<% @movie ? $curr_movie = @movie : $curr_movie = $movie %>
+<div id="follow_form_<%= $curr_movie.id %>">
+	<% if current_user.following_movie?($curr_movie) %>
+	  <%= render 'unfollow_movie' %>
+  <% else %>
+  	<%= render 'follow_movie' %>
+	<% end %>
+</div>

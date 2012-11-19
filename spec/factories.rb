@@ -32,4 +32,24 @@ FactoryGirl.define do
     episode
     watched true
   end
+
+  factory :movie do
+    tmdb_id 550
+    imdb_id "tt0137523"
+    title "Fight Club"
+    release_date "1999-10-15"
+    overview "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion."
+    status "Released"
+    run_time 139
+    production_company "20th Century Fox"
+    language "English"
+    genre "Action"
+  end
+
+  factory :movie_tracker do
+    user
+    movie
+    watched true
+    rating true
+  end
 end
