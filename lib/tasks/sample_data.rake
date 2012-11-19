@@ -1,6 +1,7 @@
 require 'csv'
-TVdbDir = "/Users/bwb/Sites/revoot/tvdb_api/"
-TMdbDir = "/Users/bwb/Sites/revoot/tmdb_api/"
+APP_ROOT = File.dirname(__FILE__)
+TVdbDir = "#{APP_ROOT}/apis/tvdb_api/"
+TMdbDir = "#{APP_ROOT}/apis/tmdb_api/"
 
 namespace :db do
   
