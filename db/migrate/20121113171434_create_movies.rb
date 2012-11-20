@@ -5,7 +5,7 @@ class CreateMovies < ActiveRecord::Migration
       t.string :imdb_id
       t.string :title
       t.string :release_date
-      t.string :overview
+      t.text :overview
       t.string :status
       t.integer :run_time
       t.string :production_company
