@@ -17,10 +17,16 @@
       <%= render 'layouts/footer'%>
 	  <%= debug(params) if Rails.env.development? %>
     </div>
-	  <p align="center">Request Testing: </p>
-	  <p align="center">METHOD = <%= request.method() if Rails.env.development? %></p>
-	  <p align="center">IP = <%= request.ip() if Rails.env.development? %></p>
-	  <p align="center">SERVER = <%= request.server_software() if Rails.env.development? %></p>
-	  <p align="center">LOCAL = <%= request.local?() if Rails.env.development? %></p>
+    <% if Rails.env.development? %>
+      <div class="debug container">
+        <em>Request Testing:</em>
+        <ul>
+          <li>METHOD = <%= request.method() %></li>
+          <li>IP = <%= request.ip() %></li>
+          <li>SERVER = <%= request.server_software() %></li>
+          <li>LOCAL = <%= request.local?() %></li>
+        </ul>
+      </div>
+    <% end %>
   </body>
 </html>

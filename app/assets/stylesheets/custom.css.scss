@@ -213,3 +213,10 @@ input, textarea, select, .uneditable-input {
     }
   }
 }
+
+/* debug formatting */
+.debug {
+  border: 1px solid gray;
+  background-color: $grayLighter;
+  padding: 10px 0;
+}
