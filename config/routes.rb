@@ -10,10 +10,12 @@ RevootApp::Application.routes.draw do
       get :tv_show_followers
     end
   end
+  resources :episode_trackers do
+      get 'toggle_watched_season', :on => :member
+  end
   resources :episodes
   resources :sessions,      only: [:new, :create, :destroy]
   resources :tv_relationships, only: [:create, :destroy]
-  resources :episode_trackers, only: [:update]
   resources :movies
   resources :movie_trackers, only: [:create, :destroy, :update]
 
