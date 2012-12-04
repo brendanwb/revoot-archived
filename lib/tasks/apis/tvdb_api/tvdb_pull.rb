@@ -2,10 +2,12 @@ require 'rubygems'
 require 'net/http'
 require 'nokogiri'
 
+APP_ROOT = File.dirname(__FILE__)
+WorkingDir = "#{APP_ROOT}/apis/tvdb_api/"
+
 MirrorsPath    = 'http://www.thetvdb.com/api/102D37BF66CADAB7/'
 ServerTimeUri  = 'http://www.thetvdb.com/api/Updates.php?type=none'
 SeriesbyId     = 'http://www.thetvdb.com/api/GetSeries.php?seriesname='
-WorkingDir     = '/Users/bwb/Sites/revoot/tvdb_api/'
 
 def grab_xml(uri)
   begin
