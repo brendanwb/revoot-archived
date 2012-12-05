@@ -109,6 +109,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def unwatch_entire_season!(tv_show,season_num)
+    episodes = tv_show.episodes.where(season_num:season_num)
+    episodes.each do |episode|
+      unwatch_episode!(episode)
+    end
+  end
+
   def following_movie?(movie)
     movie_trackers.find_by_movie_id(movie.id)
   end

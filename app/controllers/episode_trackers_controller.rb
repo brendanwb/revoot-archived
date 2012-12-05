@@ -18,12 +18,15 @@ class EpisodeTrackersController < ApplicationController
 
   def toggle_watched_season
   	@tv_show    = TvShow.find(params[:id])
-  	@season_num = 1
+  	@season_num = params[:season]
   	if !current_user.watched_entire_season?(@tv_show,@season_num)
   		current_user.watched_entire_season!(@tv_show,@season_num)
   	else
   		current_user.unwatch_entire_season!(@tv_show,@season_num)
   	end
   	render :nothing => true
+  end
+  respond_to do |format|
+  	format.html {redirect_to @tv_show}
   end
 end

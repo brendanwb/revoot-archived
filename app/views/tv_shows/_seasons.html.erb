@@ -3,7 +3,11 @@
  		<% if $current_season != seasons.season_num %>
 			<h2>Season: <%= seasons.season_num %></h2>
 			<% $current_season = seasons.season_num %>
-			<%= link_to watched_entire_season_text(@tv_show,$current_season), toggle_watched_season_episode_tracker_path(@tv_show), :remote => true %>
+			<% if signed_in? %>
+				<% if current_user.following_show?(@tv_show) %>
+				  <%= link_to watched_entire_season_text(@tv_show,$current_season), toggle_watched_season_episode_tracker_path(@tv_show,:season => $current_season), :remote => true %>
+				<% end %>
+			<% end %>
       <li>
       	<span class="content"><%= seasons.season_num %>x<%= seasons.episode_num %> <%= seasons.name %></span>
 			  <%= render 'episode_tracker_form' if signed_in? %>
