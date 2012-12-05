@@ -2,7 +2,6 @@ class EpisodeTrackersController < ApplicationController
   before_filter :signed_in?
   
   def update
-  	# @tv_show = TvShow.episodes.find_by_episode_id([:episode_tracker][:episode_id])
   	@episode = Episode.find(params[:episode_tracker][:episode_id])
   	if !current_user.watched_episode?(@episode)
 	  	current_user.watch_episode!(@episode)
@@ -17,4 +16,17 @@ class EpisodeTrackersController < ApplicationController
 		end
   end
 
+  def toggle_watched_season
+  	@tv_show    = TvShow.find(params[:id])
+  	@season_num = params[:season]
+  	if !current_user.watched_entire_season?(@tv_show,@season_num)
+  		current_user.watched_entire_season!(@tv_show,@season_num)
+  	else
+  		current_user.unwatch_entire_season!(@tv_show,@season_num)
+  	end
+  	render :nothing => true
+  end
+  respond_to do |format|
+  	format.html {redirect_to @tv_show}
+  end
 end

@@ -69,6 +69,53 @@ class User < ActiveRecord::Base
     @tracker.save
   end
 
+  def watched_entire_series?(tv_show)
+    episodes = tv_show.episodes
+    watch_history = []
+    episodes.each do |episode|
+      watch_history << watched_episode?(episode)
+    end
+    unless watch_history.include?(false)
+      true
+    else
+      false
+    end    
+  end
+
+  def watched_all_episodes!(tv_show)
+    episodes = tv_show.episodes
+    episodes.each do |episode|
+      watch_episode!(episode)
+    end
+  end
+
+  def watched_entire_season?(tv_show,season_num)
+    episodes = tv_show.episodes.where(season_num:season_num)
+    watch_history = []
+    episodes.each do |episode|
+      watch_history << watched_episode?(episode)
+    end
+    unless watch_history.include?(false)
+      true
+    else
+      false
+    end
+  end
+
+  def watched_entire_season!(tv_show,season_num)
+    episodes = tv_show.episodes.where(season_num:season_num)
+    episodes.each do |episode|
+      watch_episode!(episode)
+    end
+  end
+
+  def unwatch_entire_season!(tv_show,season_num)
+    episodes = tv_show.episodes.where(season_num:season_num)
+    episodes.each do |episode|
+      unwatch_episode!(episode)
+    end
+  end
+
   def following_movie?(movie)
     movie_trackers.find_by_movie_id(movie.id)
   end
