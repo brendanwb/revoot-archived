@@ -2,4 +2,5 @@
 
 		<h3>
 			<%= link_to my_tv_shows.name, tv_show_page_path(my_tv_shows.id) %>
+			<%= number_to_percentage(current_user.percent_watched?(my_tv_shows), :precision => 0) %>
 		</h3>

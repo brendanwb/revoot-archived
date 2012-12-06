@@ -52,6 +52,24 @@ class User < ActiveRecord::Base
     end
   end
 
+  def percent_watched?(tv_show)
+    if following_show?(tv_show)
+      @episode_count = tv_show.episodes.count
+      episodes = tv_show.episodes
+      watched_count = []
+      episodes.each do |episode|
+        if watched_episode?(episode)
+          watched_count << episode
+        end
+      end
+      a = watched_count.count + 0.00
+      b = @episode_count + 0.00
+      percent = (a / b) * 100
+    else
+      percent = 0
+    end
+  end
+
   def watched_episode?(episode)
     @tracker = episode_trackers.find_by_episode_id(episode.id)
     @tracker.watched
@@ -79,7 +97,7 @@ class User < ActiveRecord::Base
       true
     else
       false
-    end    
+    end
   end
 
   def watched_all_episodes!(tv_show)

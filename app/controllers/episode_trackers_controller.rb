@@ -26,7 +26,14 @@ class EpisodeTrackersController < ApplicationController
   	end
   	render :nothing => true
   end
-  respond_to do |format|
-  	format.html {redirect_to @tv_show}
+
+  def toggle_entire_show
+    @tv_show    = TvShow.find(params[:id])
+    if !current_user.watched_entire_series?(@tv_show)
+      current_user.watched_all_episodes!(@tv_show)
+    end
+    redirect_to @tv_show
+    render :nothing => true
   end
+
 end

@@ -11,7 +11,10 @@ RevootApp::Application.routes.draw do
     end
   end
   resources :episode_trackers do
-      get 'toggle_watched_season', :on => :member
+    member do
+      get 'toggle_watched_season'
+      get 'toggle_entire_show'
+    end
   end
   resources :episodes
   resources :sessions,      only: [:new, :create, :destroy]
