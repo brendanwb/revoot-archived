@@ -5,7 +5,7 @@
 			<% $current_season = seasons.season_num %>
 			<% if signed_in? %>
 				<% if current_user.following_show?(@tv_show) %>
-				  <%= link_to watched_entire_season_text(@tv_show,$current_season), toggle_watched_season_episode_tracker_path(@tv_show,:season => $current_season), :remote => true, :class => "btn btn-success" %>
+				  <%= link_to watched_entire_season_text(@tv_show,$current_season), toggle_watched_season_episode_tracker_path(@tv_show,:season => $current_season), :class => "btn btn-success" %>
 				<% end %>
 			<% end %>
       <li>

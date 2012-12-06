@@ -17,7 +17,7 @@
     <%= render 'follow_tv_show_form' if signed_in? %>
     <% if signed_in? %>
       <% if current_user.following_show?(@tv_show) %>
-        <%= link_to watched_entire_series_text(@tv_show), toggle_entire_show_episode_tracker_path(@tv_show), :remote => true, :class => "btn btn-primary" %>
+        <%= link_to watched_entire_series_text(@tv_show), toggle_entire_show_episode_tracker_path(@tv_show), :class => "btn btn-primary" %>
       <% end %>  
     <% end %>
   </aside><!-- <aside class="span4"> -->

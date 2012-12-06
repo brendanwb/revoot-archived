@@ -24,7 +24,8 @@ class EpisodeTrackersController < ApplicationController
   	else
   		current_user.unwatch_entire_season!(@tv_show,@season_num)
   	end
-  	render :nothing => true
+  	redirect_to @tv_show
+    # render :nothing => true
   end
 
   def toggle_entire_show
@@ -33,7 +34,7 @@ class EpisodeTrackersController < ApplicationController
       current_user.watched_all_episodes!(@tv_show)
     end
     redirect_to @tv_show
-    render :nothing => true
+    # render :nothing => true
   end
 
 end
