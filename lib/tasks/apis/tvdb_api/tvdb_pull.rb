@@ -3,7 +3,9 @@ require 'net/http'
 require 'nokogiri'
 
 APP_ROOT = File.dirname(__FILE__)
-WorkingDir = "#{APP_ROOT}/apis/tvdb_api/"
+# WorkingDir = "#{APP_ROOT}/apis/tvdb_api/"
+# WorkingDir     = '/Users/bwb/Sites/revoot/revoot_app/lib/tasks/apis/tvdb_api/'
+WorkingDir     = '#{APP_ROOT}/lib/tasks/apis/tvdb_api/'
 
 MirrorsPath    = 'http://www.thetvdb.com/api/102D37BF66CADAB7/'
 ServerTimeUri  = 'http://www.thetvdb.com/api/Updates.php?type=none'
@@ -98,6 +100,12 @@ File.open("#{WorkingDir}TV_Show_List.txt", 'r').each do |show|
     episode_ids[i+=1] = [series_id,xml_doc.xpath("Data/Episode[#{num}]/id").text]
   end
 
+  episode_imdb_ids = Hash.new(0)
+  i = 0
+  1.upto(300) do |num|
+    episode_imdb_ids[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/IMDB_ID").text]
+  end
+
   episode_names = Hash.new(0)
   i = 0
   1.upto(300) do |num|
@@ -107,13 +115,13 @@ File.open("#{WorkingDir}TV_Show_List.txt", 'r').each do |show|
   episode_season_nums = Hash.new(0)
   i = 0
   1.upto(300) do |num|
-    episode_season_nums[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/Combined_season").text]
+    episode_season_nums[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/SeasonNumber").text]
   end
 
   episode_nums = Hash.new(0)
   i = 0
   1.upto(300) do |num|
-    episode_nums[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/Combined_episodenumber").text]
+    episode_nums[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/EpisodeNumber").text]
   end
 
   episode_first_aired = Hash.new(0)
@@ -122,21 +130,29 @@ File.open("#{WorkingDir}TV_Show_List.txt", 'r').each do |show|
     episode_first_aired[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/FirstAired").text]
   end
 
+  episode_overview = Hash.new(0)
+  i = 0
+  1.upto(300) do |num|
+    episode_overview[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/Overview").text]
+  end
+
   # p episode_ids
   # p episode_names
   # p episode_season_nums
   # p episode_nums
 
+  episode_ids.merge!(episode_imdb_ids){ |k,o,n| o+n }
   episode_ids.merge!(episode_names){ |k,o,n| o+n }
   episode_ids.merge!(episode_season_nums){ |k,o,n| o+n }
   episode_ids.merge!(episode_nums){ |k,o,n| o+n }
   episode_ids.merge!(episode_first_aired){ |k,o,n| o+n }
+  episode_ids.merge!(episode_overview){ |k,o,n| o+n }
   # p episode_ids
   
   File.open("#{WorkingDir}#{$server_time}_Episode_Pull.csv","a") do |file|
     episode_ids.each_value do |v|
       unless v[3].empty? || v[3] == "0"
-        file.puts "\"#{v[0]}\",\"#{v[1]}\",\"#{v[2]}\",\"#{v[3]}\",\"#{v[4]}\",\"#{v[5]}\""
+        file.puts "\"#{v[0]}\",\"#{v[1]}\",\"#{v[2]}\",\"#{v[3]}\",\"#{v[4]}\",\"#{v[5]}\",\"#{v[6]}\",\"#{v[7]}\""
       end
     end
   end

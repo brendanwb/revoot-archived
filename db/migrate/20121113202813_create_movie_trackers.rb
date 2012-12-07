@@ -8,5 +8,6 @@ class CreateMovieTrackers < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :movie_trackers, [:user_id, :movie_id]
   end
 end

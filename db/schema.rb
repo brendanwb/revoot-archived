@@ -17,19 +17,22 @@ ActiveRecord::Schema.define(:version => 20121113202813) do
     t.integer  "user_id"
     t.integer  "episode_id"
     t.boolean  "watched"
+    t.boolean  "rating"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "episode_trackers", ["user_id", "episode_id"], :name => "index_show_trackers_on_user_id_and_episode_id"
+  add_index "episode_trackers", ["user_id", "episode_id"], :name => "index_episode_trackers_on_user_id_and_episode_id"
 
   create_table "episodes", :force => true do |t|
     t.integer  "tv_show_id"
     t.string   "tvdb_id"
+    t.string   "imdb_id"
     t.string   "name"
     t.string   "season_num"
     t.string   "episode_num"
     t.string   "first_aired"
+    t.text     "overview"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -45,12 +48,14 @@ ActiveRecord::Schema.define(:version => 20121113202813) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "movie_trackers", ["user_id", "movie_id"], :name => "index_movie_trackers_on_user_id_and_movie_id"
+
   create_table "movies", :force => true do |t|
     t.integer  "tmdb_id"
     t.string   "imdb_id"
     t.string   "title"
     t.string   "release_date"
-    t.string   "overview"
+    t.text     "overview"
     t.string   "status"
     t.integer  "run_time"
     t.string   "production_company"
@@ -84,11 +89,6 @@ ActiveRecord::Schema.define(:version => 20121113202813) do
   end
 
   add_index "tv_shows", ["tvdb_id"], :name => "index_tv_shows_on_tvdb_id", :unique => true
-
-  create_table "tv_shows_users", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "tv_show_id"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

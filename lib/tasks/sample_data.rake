@@ -39,15 +39,19 @@ namespace :db do
            CSV.open("#{TVdbDir}1352758523_Episode_Pull.csv","r").each do |ep|
              if show[0] == ep[0]
                tvdb_id     = ep[1]
-               name        = ep[2]
-               season_num  = ep[3]
-               episode_num = ep[4]
-               first_aired = ep[5]
+               imdb_id     = ep[2]
+               name        = ep[3]
+               season_num  = ep[4]
+               episode_num = ep[5]
+               first_aired = ep[6]
+               overview    = ep[7]
                tv_show.episodes.create!(tvdb_id: tvdb_id,
+                                        imdb_id: imdb_id,
                                         name: name,
                                         season_num: season_num,
                                         episode_num: episode_num,
-                                        first_aired: first_aired)
+                                        first_aired: first_aired,
+                                        overview: overview)
              end
            end                   
                      
