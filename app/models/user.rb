@@ -23,14 +23,21 @@ class User < ActiveRecord::Base
   has_many :movie_trackers, dependent: :destroy
 
   before_save { |user| user.email = email.downcase }
-  before_save :create_remember_token
+  before_save { create_remember_token(:remember_token) }
   
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, 
                     uniqueness: { case_sensitive: false }         
-  validates :password, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 6 }, unless: Proc.new { |user| user.password.nil? }
+  validates :password_confirmation, presence: true, unless: Proc.new { |user| user.password.nil? }
+
+  def send_password_reset
+    create_remember_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
 
   def following_show?(tv_show)
     tv_relationships.find_by_tv_show_id(tv_show.id)
@@ -152,8 +159,8 @@ class User < ActiveRecord::Base
   end
 
   private
-  
-    def create_remember_token
-      self.remember_token = SecureRandom.urlsafe_base64
+    # modified for use with more than one column
+    def create_remember_token(column)
+      self[column] = SecureRandom.urlsafe_base64
     end
 end
