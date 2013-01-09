@@ -58,8 +58,8 @@ RevootApp::Application.configure do
     :address => 'smtp.gmail.com',
     :port => 587,
     :domain => "gmail.com",
-    :user_name => 'brendan.buckingham@gmail.com',
-    :password => '10atVDay',
+    :user_name => 'revootsite@gmail.com',
+    :password => 'mvmbcatalog',
     :authentication => 'plain'
   }
 
