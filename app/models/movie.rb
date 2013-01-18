@@ -7,7 +7,7 @@
 #  imdb_id            :string(255)
 #  title              :string(255)
 #  release_date       :string(255)
-#  overview           :string(255)
+#  overview           :text
 #  status             :string(255)
 #  run_time           :integer
 #  production_company :string(255)

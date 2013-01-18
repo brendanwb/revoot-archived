@@ -4,7 +4,15 @@ class UsersController < ApplicationController
   before_filter :admin_user,     only: :destroy
   
   def show
-    @user        = User.find(params[:id])
+    if User.exists?(:confirmation_token => params[:id])
+      @user = User.find_by_confirmation_token!(params[:id])
+      @user.activate_user
+      sign_in @user
+      flash[:success] = "Your Account has been Confirmed!"
+      redirect_to @user
+    else
+      @user = User.find(params[:id])
+    end
     @my_tv_shows = @user.followed_shows
     @my_movies   = @user.movies
   end
@@ -23,6 +31,9 @@ class UsersController < ApplicationController
     else
       @user = User.new(params[:user])
       if @user.save
+        @user.send_confirmation_email
+        @user.state = "pending"
+        @user.save!
         sign_in @user
         flash[:success] = "Welcome to Revoot!"
         redirect_to @user
@@ -59,10 +70,6 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   end
-  
-  # def followed_shows
-  #   redirect_to users_path
-  # end
 
   private
   

@@ -6,6 +6,7 @@
 #  user_id    :integer
 #  episode_id :integer
 #  watched    :boolean
+#  rating     :boolean
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #

@@ -8,6 +8,8 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'ruby-tmdb3'
 gem 'tvdb_party'
+gem 'state_machine'
+gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

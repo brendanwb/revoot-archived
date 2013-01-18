@@ -2,14 +2,19 @@
 #
 # Table name: users
 #
-#  id              :integer         not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime        not null
-#  updated_at      :datetime        not null
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean         default(FALSE)
+#  id                      :integer         not null, primary key
+#  name                    :string(255)
+#  email                   :string(255)
+#  created_at              :datetime        not null
+#  updated_at              :datetime        not null
+#  password_digest         :string(255)
+#  remember_token          :string(255)
+#  admin                   :boolean         default(FALSE)
+#  password_reset_token    :string(255)
+#  password_reset_sent_at  :datetime
+#  confirmation_token      :string(255)
+#  confirmation_token_sent :datetime
+#  state                   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -32,11 +37,32 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, unless: Proc.new { |user| user.password.nil? }
   validates :password_confirmation, presence: true, unless: Proc.new { |user| user.password.nil? }
 
+  # state_machine do
+  #   state :pending
+  #   state :active
+
+  #   event :activate do
+  #     transition :pending => :active, :on_transition => :activate_user
+  #   end
+  # end
+
   def send_password_reset
     create_remember_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
+  end
+
+  def send_confirmation_email
+    create_remember_token(:confirmation_token)
+    self.confirmation_token_sent = Time.zone.now
+    save!
+    UserMailer.confirmation_email(self).deliver
+  end
+
+  def activate_user
+    self.state = "active"
+    save!
   end
 
   def following_show?(tv_show)
@@ -163,4 +189,5 @@ class User < ActiveRecord::Base
     def create_remember_token(column)
       self[column] = SecureRandom.urlsafe_base64
     end
+
 end
