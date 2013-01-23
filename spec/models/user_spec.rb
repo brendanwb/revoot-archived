@@ -227,7 +227,7 @@ describe User do
     end
 
     it "should show all the movie trackers for a given user" do
-      @user.movie_trackers.should == [movie_tracker_first,movie_tracker_second]
+      @user.movie_trackers.should == [movie_tracker_second,movie_tracker_first]
     end
     
     let(:movie_tracker) do
@@ -235,7 +235,7 @@ describe User do
     end
     
     it "should just contain the first movie tracker in the array" do
-      movie_tracker.should == movie_tracker_first
+      movie_tracker.should == movie_tracker_second
     end
     
     let(:movie_tracker_by_movie) do

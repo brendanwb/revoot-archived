@@ -88,11 +88,11 @@ describe Episode do
     
     before { @episode.save }
     let!(:episode_tracker_first) do
-      FactoryGirl.create(:episode_tracker, user_id: 44, episode_id: @episode)
+      FactoryGirl.create(:episode_tracker, user_id: 44, episode_id: @episode.id)
     end
 
     let!(:episode_tracker_second) do
-      FactoryGirl.create(:episode_tracker, user_id: 12, episode_id: @episode)
+      FactoryGirl.create(:episode_tracker, user_id: 12, episode_id: @episode.id)
     end
 
     it "should show all the episode trackers for a given user" do

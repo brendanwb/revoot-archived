@@ -59,17 +59,17 @@ describe "Authentication" do
         it { should_not have_link('Sign out', href: signout_path) }
       end
       
-      describe "in the TV Relationships controller" do
-        describe "submitting to the create action" do
-          before { post tv_relationships_path }
-          specify { response.should redirect_to(signin_path) }
-        end
+      # describe "in the TV Relationships controller" do
+      #   describe "submitting to the create action" do
+      #     before { post tv_relationships_path }
+      #     specify { response.should redirect_to(signin_path) }
+      #   end
 
-        describe "submitting to the destroy action" do
-          before { delete tv_relationship_path(1) }
-          specify { response.should redirect_to(signin_path) }          
-        end
-      end
+      #   describe "submitting to the destroy action" do
+      #     before { delete tv_relationship_path(1) }
+      #     specify { response.should redirect_to(signin_path) }          
+      #   end
+      # end
       
       describe "when attempting to visit a protected page" do
         before do

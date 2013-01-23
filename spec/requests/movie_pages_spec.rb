@@ -30,7 +30,7 @@ describe "Movie Pages" do
 		it { should have_selector('p',        text: single_movie.overview) }
 		it { should have_selector('h3',       text: "Overview") }
 
-		describe "follow/unfollow buttons" do
+		describe "follow/Watched buttons" do
       before { sign_in user }
 
       describe "following a movie" do
@@ -38,13 +38,13 @@ describe "Movie Pages" do
 
         it "should increment the movie_followers" do
           expect do
-            click_button "Follow"
+            click_button "Need to Watch"
           end.to change(single_movie.movie_trackers, :count).by(1)
         end
 
         describe "toggling the button" do
-          before { click_button "Follow" }
-          it { should have_selector('input', value: "Unfollow") }
+          before { click_button "Need to Watch" }
+          it { should have_selector('input', value: "Watched") }
         end
       end
 
@@ -56,13 +56,13 @@ describe "Movie Pages" do
 
         it "should decrement the movies followers count" do
           expect do
-            click_button "Unfollow"
+            click_button "Watched"
           end.to change(single_movie.movie_trackers, :count).by(-1)
         end
 
         describe "toggling the button" do
-          before { click_button "Unfollow" }
-          it { should have_selector('input', value: 'Follow') }
+          before { click_button "Watched" }
+          it { should have_selector('input', value: 'Need to Watch') }
         end        
       end
     end
