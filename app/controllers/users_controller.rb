@@ -32,7 +32,6 @@ class UsersController < ApplicationController
       @user = User.new(params[:user])
       if @user.save
         @user.send_confirmation_email
-        @user.state = "pending"
         @user.save!
         sign_in @user
         flash[:success] = "Welcome to Revoot!"

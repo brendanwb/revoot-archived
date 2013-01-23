@@ -14,7 +14,7 @@
 #  password_reset_sent_at  :datetime
 #  confirmation_token      :string(255)
 #  confirmation_token_sent :datetime
-#  state                   :string(255)
+#  active                  :boolean
 #
 
 class User < ActiveRecord::Base
@@ -37,15 +37,6 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, unless: Proc.new { |user| user.password.nil? }
   validates :password_confirmation, presence: true, unless: Proc.new { |user| user.password.nil? }
 
-  # state_machine do
-  #   state :pending
-  #   state :active
-
-  #   event :activate do
-  #     transition :pending => :active, :on_transition => :activate_user
-  #   end
-  # end
-
   def send_password_reset
     create_remember_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
@@ -61,7 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def activate_user
-    self.state = "active"
+    self.toggle(:active)
     save!
   end
 

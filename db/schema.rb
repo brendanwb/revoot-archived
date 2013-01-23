@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(:version => 20130111182515) do
     t.datetime "password_reset_sent_at"
     t.string   "confirmation_token"
     t.datetime "confirmation_token_sent"
-    t.string   "state"
+    t.boolean  "active",                  :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

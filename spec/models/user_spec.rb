@@ -14,7 +14,7 @@
 #  password_reset_sent_at  :datetime
 #  confirmation_token      :string(255)
 #  confirmation_token_sent :datetime
-#  state                   :string(255)
+#  active                  :boolean
 #
 
 require 'spec_helper'
@@ -33,6 +33,11 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
+  it { should respond_to(:password_reset_token) }
+  it { should respond_to(:password_reset_sent_at) }
+  it { should respond_to(:confirmation_token) }
+  it { should respond_to(:confirmation_token_sent) }
+  it { should respond_to(:active) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:episodes) }
   it { should respond_to(:episode_trackers) }
