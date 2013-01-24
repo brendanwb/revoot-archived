@@ -1,5 +1,5 @@
 class MovieTrackersController < ApplicationController
-  before_filter :signed_in?
+  before_filter :signed_in_user
 
   def create
   	@movie = Movie.find(params[:movie_tracker][:movie_id])

@@ -1,5 +1,5 @@
 class TvRelationshipsController < ApplicationController
-	before_filter :signed_in?
+	before_filter :signed_in_user
 
 	def create
 		@tv_show = TvShow.find(params[:tv_relationship][:tv_show_id])

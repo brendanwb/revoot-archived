@@ -1,5 +1,5 @@
 class EpisodeTrackersController < ApplicationController
-  before_filter :signed_in?
+  before_filter :signed_in_user
   
   def update
   	@episode = Episode.find(params[:episode_tracker][:episode_id])
