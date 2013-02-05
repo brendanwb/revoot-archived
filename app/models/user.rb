@@ -56,6 +56,10 @@ class User < ActiveRecord::Base
     save!
   end
 
+  def activated?
+    self.active
+  end
+
   def following_show?(tv_show)
     tv_relationships.find_by_tv_show_id(tv_show.id)
   end

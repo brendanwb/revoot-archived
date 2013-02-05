@@ -4,19 +4,24 @@ class UsersController < ApplicationController
   before_filter :admin_user,     only: :destroy
   
   def show
-    if User.exists?(:confirmation_token => params[:id])
-      @user = User.find_by_confirmation_token!(params[:id])
-      @user.activate_user
-      sign_in @user
-      flash[:success] = "Your Account has been Confirmed!"
-      redirect_to @user
-    else
-      @user = User.find(params[:id])
-    end
+    @user = User.find(params[:id])
     @my_tv_shows = @user.followed_shows
     @my_movies   = @user.movies
   end
   
+  def activation
+    @user = User.find_by_confirmation_token!(params[:confirmation_token])
+    if @user.activated?
+      flash[:error] = "This account has already been confirmed!"
+      redirect_to root_path
+    else
+      @user.activate_user
+      sign_in @user
+      flash[:success] = "Your account has been confirmed!"
+      redirect_to @user
+    end
+  end
+
   def new
     if signed_in?
       redirect_to root_path

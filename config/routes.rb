@@ -35,6 +35,7 @@ RevootApp::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
   match 'tv',       to: 'tv_shows#index'
   match 'tv/:id' => 'tv_shows#show', :as => 'tv_show_page'
+  match 'activation/:confirmation_token' => 'users#activation', :as => 'confirm_user'
 
   # See how all your routes lay out with "rake routes"
 
