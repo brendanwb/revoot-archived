@@ -4,12 +4,12 @@ require 'nokogiri'
 
 APP_ROOT = File.dirname(__FILE__)
 # WorkingDir = "#{APP_ROOT}/apis/tvdb_api/"
-# WorkingDir     = '/Users/bwb/Sites/revoot/revoot_app/lib/tasks/apis/tvdb_api/'
-WorkingDir     = '#{APP_ROOT}/lib/tasks/apis/tvdb_api/'
+WorkingDir     = '/Users/bwb/Sites/revoot/revoot_app/lib/tasks/apis/tvdb_api/'
+# WorkingDir     = '#{APP_ROOT}/lib/tasks/apis/tvdb_api/'
 
 MirrorsPath    = 'http://www.thetvdb.com/api/102D37BF66CADAB7/'
 ServerTimeUri  = 'http://www.thetvdb.com/api/Updates.php?type=none'
-SeriesbyId     = 'http://www.thetvdb.com/api/GetSeries.php?seriesname='
+SeriesbyId     = 'http://www.thetvdb.com/api/GetSeriesByRemoteID.php?imdbid='
 
 def grab_xml(uri)
   begin
