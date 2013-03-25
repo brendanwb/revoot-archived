@@ -18,9 +18,8 @@ def grab_xml(uri)
       raise
     end
     return response
-  rescue
-    puts "Failed to grab Server Time"
-    exit 1
+  rescue => e
+    puts "Error: #{e}"
   end
 end
 
@@ -29,7 +28,6 @@ def create_xml(response)
     xml_doc = Nokogiri::XML(response.body)
   rescue
     puts "No valid XML"
-    exit 1
   end
 end
 
@@ -88,86 +86,86 @@ File.open("#{WorkingDir}TV_Show_List.txt", 'r').each do |show|
 
   tv_shows = {1 => [series_id,series_name,year,network,genre].flatten}
 
-  File.open("#{WorkingDir}#{$server_time}_TV_Show_Pull.csv","a") do |file|
+  File.open("#{WorkingDir}TV_Show_Pull.csv","a") do |file|
     tv_shows.each_value do |v|
       file.puts "\"#{v[0]}\",\"#{v[1]}\",#{v[2]},\"#{v[3]}\",\"#{v[4]}\""
     end
   end
 
-  episode_ids = Hash.new(0)
-  i = 0
-  1.upto(300) do |num|
-    episode_ids[i+=1] = [series_id,xml_doc.xpath("Data/Episode[#{num}]/id").text]
-  end
+  1.upto(300) do |count|
+    # a       = xml_doc.xpath("Data/Episode[#{count}]/FirstAired").text
+    # a_split = a.split("-")
+    # a_time  = Time.new(a_split[0],a_split[1],a_split[2])
+    # unless Time.now < a_time
 
-  episode_imdb_ids = Hash.new(0)
-  i = 0
-  1.upto(300) do |num|
-    episode_imdb_ids[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/IMDB_ID").text]
-  end
+      episode_ids = Hash.new(0)
+      i = 0
+      episode_ids[i+=1] = [series_id,xml_doc.xpath("Data/Episode[#{count}]/id").text]
 
-  episode_names = Hash.new(0)
-  i = 0
-  1.upto(300) do |num|
-    episode_names[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/EpisodeName").text]
-  end
+      episode_imdb_ids = Hash.new(0)
+      i = 0
+      episode_imdb_ids[i+=1] = [xml_doc.xpath("Data/Episode[#{count}]/IMDB_ID").text]
 
-  episode_season_nums = Hash.new(0)
-  i = 0
-  1.upto(300) do |num|
-    episode_season_nums[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/SeasonNumber").text]
-  end
+      episode_names = Hash.new(0)
+      i = 0
+      episode_names[i+=1] = [xml_doc.xpath("Data/Episode[#{count}]/EpisodeName").text]
 
-  episode_nums = Hash.new(0)
-  i = 0
-  1.upto(300) do |num|
-    episode_nums[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/EpisodeNumber").text]
-  end
+      episode_season_nums = Hash.new(0)
+      i = 0
+      episode_season_nums[i+=1] = [xml_doc.xpath("Data/Episode[#{count}]/SeasonNumber").text]
 
-  episode_first_aired = Hash.new(0)
-  i = 0
-  1.upto(300) do |num|
-    episode_first_aired[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/FirstAired").text]
-  end
+      episode_nums = Hash.new(0)
+      i = 0
+      episode_nums[i+=1] = [xml_doc.xpath("Data/Episode[#{count}]/EpisodeNumber").text]
 
-  episode_overview = Hash.new(0)
-  i = 0
-  1.upto(300) do |num|
-    episode_overview[i+=1] = [xml_doc.xpath("Data/Episode[#{num}]/Overview").text]
-  end
+      episode_first_aired = Hash.new(0)
+      i = 0
+      episode_first_aired[i+=1] = [xml_doc.xpath("Data/Episode[#{count}]/FirstAired").text]
 
-  # p episode_ids
-  # p episode_names
-  # p episode_season_nums
-  # p episode_nums
-
-  episode_ids.merge!(episode_imdb_ids){ |k,o,n| o+n }
-  episode_ids.merge!(episode_names){ |k,o,n| o+n }
-  episode_ids.merge!(episode_season_nums){ |k,o,n| o+n }
-  episode_ids.merge!(episode_nums){ |k,o,n| o+n }
-  episode_ids.merge!(episode_first_aired){ |k,o,n| o+n }
-  episode_ids.merge!(episode_overview){ |k,o,n| o+n }
-  # p episode_ids
-  
-  File.open("#{WorkingDir}#{$server_time}_Episode_Pull.csv","a") do |file|
-    episode_ids.each_value do |v|
-      unless v[3].empty? || v[3] == "0"
-        file.puts "\"#{v[0]}\",\"#{v[1]}\",\"#{v[2]}\",\"#{v[3]}\",\"#{v[4]}\",\"#{v[5]}\",\"#{v[6]}\",\"#{v[7]}\""
+      episode_overview = Hash.new(0)
+      i = 0
+      raw_text = xml_doc.xpath("Data/Episode[#{count}]/Overview").text
+      cleaned_text = raw_text.gsub!("\"","'")
+      if cleaned_text.nil?
+        episode_overview[i+=1] = [xml_doc.xpath("Data/Episode[#{count}]/Overview").text]
+      else
+        episode_overview[i+=1] = [cleaned_text]
       end
-    end
-  end
-  
-  
-  episode_ids.each_value do |v|
-    unless v[2].empty? || v[2] == "0"
-      puts "Id: #{v[0]}\n"
-      puts "Episode Name: #{v[1]}\n"
-      puts "Season Num: #{v[2]}\n"
-      puts "Episode Num: #{v[3]}\n"
-      puts "Episode First Aired: #{v[4]}\n"
-      puts "-----------------------------------------------------\n"
-    end
-  end
 
-  sleep 5  
+      # p episode_ids
+      # p episode_names
+      # p episode_season_nums
+      # p episode_nums
+
+      episode_ids.merge!(episode_imdb_ids){ |k,o,n| o+n }
+      episode_ids.merge!(episode_names){ |k,o,n| o+n }
+      episode_ids.merge!(episode_season_nums){ |k,o,n| o+n }
+      episode_ids.merge!(episode_nums){ |k,o,n| o+n }
+      episode_ids.merge!(episode_first_aired){ |k,o,n| o+n }
+      episode_ids.merge!(episode_overview){ |k,o,n| o+n }
+      # p episode_ids
+      
+      File.open("#{WorkingDir}Episode_Pull.csv","a") do |file|
+        episode_ids.each_value do |v|
+          unless v[4].empty? || v[4] == "0"
+            file.puts "\"#{v[0]}\",\"#{v[1]}\",\"#{v[2]}\",\"#{v[3]}\",\"#{v[4]}\",\"#{v[5]}\",\"#{v[6]}\",\"#{v[7]}\""
+          end
+        end
+      end
+      
+      
+      episode_ids.each_value do |v|
+        unless v[4].empty? || v[4] == "0"
+          puts "Id: #{v[1]}\n"
+          puts "Episode Name: #{v[3]}\n"
+          puts "Season Num: #{v[4]}\n"
+          puts "Episode Num: #{v[5]}\n"
+          puts "Episode First Aired: #{v[6]}\n"
+          puts "Episode Overview: #{v[7]}\n"
+          puts "-----------------------------------------------------\n"
+        end
+      end
+    # end
+  end
+  sleep 2.5
 end
