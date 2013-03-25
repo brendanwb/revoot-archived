@@ -23,7 +23,7 @@ namespace :db do
     end
 
     # Fill db with TVShows
-    CSV.open("#{TVdbDir}1360644200_TV_Show_Pull.csv","r").each do |show|
+    CSV.open("#{TVdbDir}TV_Show_Pull.csv","r").each do |show|
       tvdb_id  = show[0]
       name     = show[1]
       year     = show[2]
@@ -36,7 +36,7 @@ namespace :db do
                                genre: genre)
 
          # Fill db with Episodes
-           CSV.open("#{TVdbDir}1360644200_Episode_Pull.csv","r").each do |ep|
+           CSV.open("#{TVdbDir}Episode_Pull.csv","r").each do |ep|
              if show[0] == ep[0]
                tvdb_id     = ep[1]
                imdb_id     = ep[2]
@@ -44,7 +44,7 @@ namespace :db do
                season_num  = ep[4]
                episode_num = ep[5]
                first_aired = ep[6]
-               overview    = ep[7]
+               overview    = ep[7].inspect
                tv_show.episodes.create!(tvdb_id: tvdb_id,
                                         imdb_id: imdb_id,
                                         name: name,
