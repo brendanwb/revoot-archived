@@ -1,4 +1,4 @@
 <%= form_for(current_user.tv_relationships.build(tv_show_id: $curr_show.id)) do |f| %>
   <div><%= f.hidden_field :tv_show_id %></div>
-  <%= f.submit "Follow", class: "btn btn-large btn-primary" %>
+  <%= f.submit "Follow", class: "btn btn-primary" %>
 <% end %>

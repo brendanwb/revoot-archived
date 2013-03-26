@@ -1,9 +1,13 @@
 class MoviesController < ApplicationController
   def index
-  	@movies = Movie.paginate(page: params[:page])
+  	@movies = Movie.all.sort_by { |obj| obj.title }
   end
 
   def show
-  	@movie = Movie.find(params[:id])
+  	@movie        = Movie.find(params[:id])
+  	@title        = @movie.title
+  	@release_date = @movie.release_date
+  	@status       = @movie.status
+  	@overview     = @movie.overview
   end
 end

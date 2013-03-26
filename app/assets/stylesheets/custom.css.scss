@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "bootstrap-responsive";
 
 /* mixins, variables, etc */
 $grayMediumLight: #eaeaea;
@@ -13,12 +14,7 @@ $grayMidRange: #a3a3a7;
 /* universal */
 
 .navbar-inner {
-  background-image: -moz-linear-gradient(top, #123456, #222222);
-  background-image: -ms-linear-gradient(top, #123456, #222222);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#123456), to(#222222));
-  background-image: -webkit-linear-gradient(top, #123456, #222222);
-  background-image: -o-linear-gradient(top, #123456, #222222);
-  background-image: linear-gradient(top, #123456, #222222);
+  background-color: black;
 }
 
 html {
@@ -29,8 +25,12 @@ body {
   padding-top: 60px;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 section {
-  overflow: auto;
+  overflow: hidden;
 }
 
 textarea {
@@ -44,61 +44,79 @@ textarea {
   }
 }
 
-.listing {
-  margin-bottom: -9px;
+/* Checklists */
+
+#title-bar-wrapper {
+  height: 50px;
+  min-width: 960px;
+  background-image: -moz-linear-gradient(top, #123456, #222222);
+  background-image: -ms-linear-gradient(top, #123456, #222222);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#123456), to(#222222));
+  background-image: -webkit-linear-gradient(top, #123456, #222222);
+  background-image: -o-linear-gradient(top, #123456, #222222);
+  background-image: linear-gradient(top, #123456, #222222);
 }
 
-.tv_show_list {
-  text-align: center;
+#title-bar {
+  position: relative;
+  height: 40px;
+  padding-top: 13px;
+  overflow: hidden;
+  h2 {
+    color: #fff;
+    text-align: left;
+    margin-left: 50px;
+  }
+}
+
+.content-wrapper {
+  margin-top: 55px;
+  padding-top: 15px;
   background-color: $grayMediumLight;
 }
 
-.tv_show_list>ul {
-  list-style: none;
+.listing {
+  height: 20px;
+  margin-bottom: -9px;
+  /*border-bottom: 1px solid gray;*/
 }
 
-.tv_show_list>li {
-  font-size: 25px;
-  font-weight: bold;
-  margin-top: -15px;
+.title-list {
+  padding-left:70px;
 }
 
 .season_header {
   font-size: 20px;
   font-weight: bold;
-  font-style: italic;
   margin-bottom: 10px;
-  background-color: $grayMediumLight;
+  border-bottom: 1px solid gray;
 }
 
 .episode_list {
   text-decoration: none;
+  h2 {
+    text-align: left;
+    padding-top: 5px;  
+  }
+  >ul {
+    list-style: none;  
+  }
+  >li {
+    margin-left: -110px;  
+  }
 }
 
-.episode_list h2 {
-  text-align: left;
-}
-
-.episode_list>ul {
-  list-style: none;
-}
-
-.episode_list>li{
-  margin-left: -110px;
-
-}
-
-.floatter_first {
+.floating-button {
   float:left;
   block:none;
-  font-size: 15px;
+  margin-top: -8px;
 }
 
-.floatter_second {
+.floating-title {
   float:left;
   block:none;
   padding-left: 10px;
-  margin-top: -6px;
+  font-size: 15px;
 }
 
 .clear_all {

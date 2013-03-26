@@ -1,4 +1,4 @@
 <%= form_for(current_user.movie_trackers.find_by_movie_id($curr_movie),
              html: { method: :delete }, remote: true) do |f| %>
-  <%= f.submit "Watched", class: "btn btn-large" %>
+  <%= f.submit "-", class: "btn" %>
 <% end %>

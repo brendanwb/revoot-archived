@@ -1,14 +1,11 @@
-<% provide(:title, @movie.title)%>
+<% provide(:title, @title)%>
 <div class="row">
-  <aside class="span4">
-      <h1>
-        <%= @movie.title %>  
-      </h1>
+  <aside class="span2">
       <p>
-        Release Date: <%= @movie.release_date %>
+        Release Date: <%= @release_date %>
       </p>
       <p>
-        Release Status: <%= @movie.status %>
+        Release Status: <%= @status %>
       </p>
       <p>
         
@@ -22,7 +19,7 @@
       </h3>
       <div id="overview">
       	<p>
-          <%= @movie.overview %>
+          <%= @overview %>
         </p>
       </div><!-- overview -->
     </section>

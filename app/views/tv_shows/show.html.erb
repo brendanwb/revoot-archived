@@ -1,18 +1,15 @@
 
-<% provide(:title, @tv_show.name)%>
+<% provide(:title, @name)%>
 <div class="row">
   <aside class="span4">
-      <h1>
-        <%= @tv_show.name %>  
-      </h1>
       <p>
-        Year: <%= @tv_show.year %>
+        Year: <%= @year %>
       </p>
       <p>
-        Network: <%= @tv_show.network %>
+        Network: <%= @network %>
       </p>
       <p>
-        Genre: <%= @tv_show.genre %>
+        <%= @genres.length > 1 ? "Genres: #{@genres}" : "Genre: #{@genres}" %>
       </p>
     <%= render 'follow_tv_show_form' if signed_in? %>
     <% if signed_in? %>
@@ -23,7 +20,7 @@
   </aside><!-- <aside class="span4"> -->
   <div class="span8">
     <section>
-      <% if @tv_show.episodes.any? %>
+      <% if @seasons.any? %>
               <% $current_season = 0 %>
       <div id="seasons">
         <%= render partial: 'seasons', collection: @seasons %>

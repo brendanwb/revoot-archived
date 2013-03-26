@@ -10,12 +10,15 @@
   <body>
 	<%= render 'layouts/header'%>
     <div class="container">
-	  <% flash.each do |k,v| %>
-		<%= content_tag(:div, v, class: "alert alert-#{k}") %>
-	  <% end %>
-      <%= yield %>
-      <%= render 'layouts/footer'%>
-	  <%= debug(params) if Rails.env.development? %>
+      <div class="content-wrapper">
+	      <% flash.each do |k,v| %>
+		      <%= content_tag(:div, v, class: "alert alert-#{k}") %>
+	      <% end %>
+        <%= yield %>
+        <div class="clear_all"></div>
+        <%= render 'layouts/footer'%>
+	      <%= debug(params) if Rails.env.development? %>
+      </div> <!-- content-wrapper -->
     </div>
     <% if Rails.env.development? %>
       <div class="debug container">

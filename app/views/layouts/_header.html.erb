@@ -30,4 +30,9 @@
       </nav>
     </div>
   </div>
+<div id="title-bar-wrapper">
+	<div id="title-bar" class="content">
+		<h2><%= full_title(yield(:title)).split("| ").last == "Revoot" ? "" : full_title(yield(:title)).split("| ").last %></h2>
+  </div>
+</div>
 </header>
