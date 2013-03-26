@@ -1,5 +1,11 @@
-<h3>
+<li>
 	<% $tv_show = tv_show %>
-  <%= link_to tv_show.name, tv_show_page_path(tv_show.id) %>
-  <%= render 'follow_tv_show_form' if signed_in? %>
-</h3>
+	<span class="span12">
+		<span class="span7">
+	    <%= link_to tv_show.name, tv_show_page_path(tv_show.id) %>
+	  </span>
+	  <span class="span3">
+	    <%= render 'follow_tv_show_form' if signed_in? %>
+	  </span>
+  </span>
+</li>

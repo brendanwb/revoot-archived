@@ -1,8 +1,10 @@
 <%= provide(:title, 'TV Shows') %>
 <h1>TV Shows</h1>
-
-<%= will_paginate %>
-
-  <%= render @tv_shows %>
-
-<%= will_paginate %>
+<div class="tv_show_list span12">
+	<%= will_paginate %>
+	<ul class="tv_show_list">
+	  <%= render @tv_shows %>
+	</ul>
+	<%= will_paginate %>
+</div>
+<div class="clear_all"></div>

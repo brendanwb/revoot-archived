@@ -1,4 +1,4 @@
-      <i class="icon-ok"></i> 
+      
 <%= form_for(current_user.episode_trackers.find_by_episode_id($curr_episode.id), remote: true) do |f| %>
   <div><%= f.hidden_field :episode_id %></div>
   <%= f.submit "Watched", class: "btn" %>

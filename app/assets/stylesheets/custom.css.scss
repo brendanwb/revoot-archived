@@ -44,6 +44,66 @@ textarea {
   }
 }
 
+.listing {
+  margin-bottom: -9px;
+}
+
+.tv_show_list {
+  text-align: center;
+  background-color: $grayMediumLight;
+}
+
+.tv_show_list>ul {
+  list-style: none;
+}
+
+.tv_show_list>li {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.season_header {
+  font-size: 20px;
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 10px;
+  background-color: $grayMediumLight;
+}
+
+.episode_list {
+  text-decoration: none;
+}
+
+.episode_list h2 {
+  text-align: left;
+}
+
+.episode_list>ul {
+  list-style: none;
+}
+
+.episode_list>li{
+  margin-left: -110px;
+
+}
+
+.floatter_first {
+  float:left;
+  block:none;
+  font-size: 15px;
+}
+
+.floatter_second {
+  float:left;
+  block:none;
+  padding-left: 10px;
+  margin-top: -6px;
+}
+
+.clear_all {
+  clear:both;
+}
 
 /* typography */
 

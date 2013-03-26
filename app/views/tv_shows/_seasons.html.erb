@@ -1,21 +1,31 @@
 
     <% $curr_episode = seasons %>
+    <div class="episode_list span7">
+    	<ul>
  		<% if $current_season != seasons.season_num %>
-			<h2>Season: <%= seasons.season_num %></h2>
+ 		  <div class="season_header row">
+			  Season: <%= seasons.season_num %>
 			<% $current_season = seasons.season_num %>
 			<% if signed_in? %>
 				<% if current_user.following_show?(@tv_show) %>
 				  <%= link_to watched_entire_season_text(@tv_show,$current_season), toggle_watched_season_episode_tracker_path(@tv_show,:season => $current_season), :class => "btn btn-success" %>
 				<% end %>
 			<% end %>
+		  </div>
       <li>
-      	<span class="content"><%= seasons.season_num %>x<%= seasons.episode_num %> <%= seasons.name %></span>
-			  <%= render 'episode_tracker_form' if signed_in? %>
+      	<div class="listing row">
+      	<span class="floatter_first"><%= seasons.season_num %>x<%= seasons.episode_num %> <%= seasons.name %></span>
+			  <span class="floatter_second"><%= render 'episode_tracker_form' if signed_in? %></span>
+			  </div>
       </li>
 		<% else %>
       <li>
-      	<span class="content"><%= seasons.season_num %>x<%= seasons.episode_num %> <%= seasons.name %></span>
-			  <%= render 'episode_tracker_form' if signed_in? %>
+      	<div class="listing row">
+      	<span class="floatter_first"><%= seasons.season_num %>x<%= seasons.episode_num %> <%= seasons.name %></span>
+			  <span class="floatter_second"><%= render 'episode_tracker_form' if signed_in? %></span>
+			  </div>
       </li>
 			<% $current_season = seasons.season_num %>
 		<% end %>
+		  </ul>
+		</div> <!-- episodes_list -->
