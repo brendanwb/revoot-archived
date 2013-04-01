@@ -22,7 +22,7 @@
     <section>
       <% if @seasons.any? %>
               <% $current_season = 0 %>
-      <div id="seasons">
+      <div class="accordian" id="accordian2">
         <%= render partial: 'seasons', collection: @seasons %>
       </div><!-- seasons -->
       <% end %>

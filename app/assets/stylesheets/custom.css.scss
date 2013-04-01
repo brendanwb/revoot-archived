@@ -91,7 +91,7 @@ textarea {
   border-bottom: 1px solid gray;
 }
 
-.episode_list {
+.episode-list {
   text-decoration: none;
   h2 {
     text-align: left;
@@ -105,10 +105,20 @@ textarea {
   }
 }
 
+.accordian-heading {
+  font-size: 15px;
+}
+
+.accordian-body {
+  margin-top: -20px;
+}
+
 .floating-button {
   float:left;
   block:none;
   margin-top: -8px;
+  margin-left: -15px;
+  padding-right: 10px;
 }
 
 .floating-title {
