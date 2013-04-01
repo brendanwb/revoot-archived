@@ -1,24 +1,27 @@
 
 <% provide(:title, @name)%>
 <div class="row">
-  <aside class="span4">
+  <aside class="span4 info-box">
+    <div class="span4">
       <p>
-        Year: <%= @year %>
+        <strong>Year: </strong><%= @year %>
       </p>
       <p>
-        Network: <%= @network %>
+        <strong>Network: </strong><%= @network %>
       </p>
       <p>
-        <%= @genres.length > 1 ? "Genres: #{@genres}" : "Genre: #{@genres}" %>
+        <strong><%= @genre_count > 1 ? "Genres: " : "Genre: " %></strong><%= @genres %>
       </p>
+      <p><strong>Overview: </strong>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
     <%= render 'follow_tv_show_form' if signed_in? %>
     <% if signed_in? %>
       <% if current_user.following_show?(@tv_show) %>
         <%= link_to watched_entire_series_text(@tv_show), toggle_entire_show_episode_tracker_path(@tv_show), :class => "btn btn-primary" %>
       <% end %>  
     <% end %>
+    </div>
   </aside><!-- <aside class="span4"> -->
-  <div class="span8">
+  <div class="span7">
     <section>
       <% if @seasons.any? %>
               <% $current_season = 0 %>

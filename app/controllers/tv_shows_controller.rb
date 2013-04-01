@@ -4,14 +4,15 @@ class TvShowsController < ApplicationController
   end
 
   def show
-  	@tv_show = TvShow.find(params[:id])
-    @name    = @tv_show.name
-    @year    = @tv_show.year
-    @network = @tv_show.network
-    genres   = @tv_show.genre.split("|")
+  	@tv_show     = TvShow.find(params[:id])
+    @name        = @tv_show.name
+    @year        = @tv_show.year
+    @network     = @tv_show.network
+    genres       = @tv_show.genre.split("|")
     genres.shift
-    @genres  = genres.join(", ")
-  	@seasons = @tv_show.episodes
+    @genre_count = genres.length
+    @genres      = genres.join(", ")
+  	@seasons     = @tv_show.episodes
   end
 
   def tv_show_followers
