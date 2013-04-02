@@ -1,6 +1,13 @@
 
 
 		<h3>
-			<%= link_to my_tv_shows.name, tv_show_page_path(my_tv_shows.id) %>
-			<%= number_to_percentage(current_user.percent_watched?(my_tv_shows), :precision => 0) %>
+			<%= link_to my_tv_shows.name, tv_show_page_path(my_tv_shows.id) %> : 
+			<%= current_user.percent_watched?(my_tv_shows) == "NaN" ? "0%" : number_to_percentage(current_user.percent_watched?(my_tv_shows), :precision => 0) %>
 		</h3>
+				<% if number_to_percentage(current_user.percent_watched?(my_tv_shows), :precision => 0) == "100%" %>
+			<div class="progress progress-success">
+        <% else %>
+			<div class="progress">
+        <% end %>
+          <div class="bar" style="width: <%= number_to_percentage(current_user.percent_watched?(my_tv_shows), :precision => 0) %>;"></div>
+			</div>
