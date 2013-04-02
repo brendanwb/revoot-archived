@@ -2,7 +2,7 @@
 <% provide(:title, @name)%>
 <div class="row">
   <aside class="span4 info-box">
-    <div class="span4">
+
       <p>
         <strong>Year: </strong><%= @year %>
       </p>
@@ -19,16 +19,13 @@
         <%= link_to watched_entire_series_text(@tv_show), toggle_entire_show_episode_tracker_path(@tv_show), :class => "btn btn-primary" %>
       <% end %>  
     <% end %>
-    </div>
   </aside><!-- <aside class="span4"> -->
-  <div class="span7">
-    <section>
-      <% if @seasons.any? %>
-              <% $current_season = 0 %>
-      <div class="accordian" id="accordian2">
-        <%= render partial: 'seasons', collection: @seasons %>
-      </div><!-- seasons -->
-      <% end %>
-    </section>
-  </div> <!-- <div class="span8"> -->
+  <section class="span7 info-box">
+    <% if @seasons.any? %>
+            <% $current_season = 0 %>
+    <div class="accordian" id="accordian2">
+      <%= render partial: 'seasons', collection: @seasons %>
+    </div><!-- seasons -->
+    <% end %>
+  </section>
 </div><!-- <div class="row"> -->
