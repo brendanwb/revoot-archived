@@ -30,11 +30,13 @@ namespace :db do
       year     = show[2]
       network  = show[3]
       genre    = show[4]
+      overview = show[5]
       tv_show = TvShow.create!(tvdb_id: tvdb_id,
                                name: name,
                                year: year,
                                network: network,
-                               genre: genre)
+                               genre: genre,
+                               overview: overview)
 
          # Fill db with Episodes
            File.open("#{TVdbDir}Episode_Pull.csv","r").each do |e|

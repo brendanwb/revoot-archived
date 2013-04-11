@@ -13,7 +13,7 @@
 #
 
 class TvShow < ActiveRecord::Base
-  attr_accessible :tvdb_id, :name, :year, :network, :genre
+  attr_accessible :tvdb_id, :name, :year, :network, :genre, :overview
   validates :name, presence: true, length: { maximum: 100 }
   
   has_many :episodes, dependent: :destroy

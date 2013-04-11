@@ -12,7 +12,7 @@
       <p>
         <strong><%= @genre_count > 1 ? "Genres: " : "Genre: " %></strong><%= @genres %>
       </p>
-      <p><strong>Overview: </strong>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      <p><strong>Overview: </strong><%= @tv_show.overview %></p>
     <%= render 'follow_tv_show_form' if signed_in? %>
     <% if signed_in? %>
       <% if current_user.following_show?(@tv_show) %>
