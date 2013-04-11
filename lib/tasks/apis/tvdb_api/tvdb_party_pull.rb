@@ -25,12 +25,12 @@ File.open("#{WorkingDir}TV_Show_List.txt", 'r').each do |show|
   File.open("#{WorkingDir}Episode_Pull.csv","a") do |file|
     episodes.each do |ep|
       ep_id            = ep.id
-      ep_name          = ep.name
+      ep_name          = ep.name == "" ? "TBA" : ep.name.strip
       ep_season_number = ep.season_number
       ep_number        = ep.number
       ep_air_date      = ep.air_date
       ep_overview      = ep.overview.gsub("\n"," ") unless ep.overview.nil?
-      file.puts "#{ep_id}~#{ep_name}~#{ep_season_number}~#{ep_number}~#{ep_air_date}~#{ep_overview}"
+      file.puts "#{series_id}~#{ep_id}~#{ep.imdb_id}~#{ep_name}~#{ep_season_number}~#{ep_number}~#{ep_air_date}~#{ep_overview}"
     end
   end
 end
