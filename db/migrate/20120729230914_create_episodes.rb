@@ -8,7 +8,7 @@ class CreateEpisodes < ActiveRecord::Migration
       t.string :season_num
       t.string :episode_num
       t.string :first_aired
-      t.string :overview
+      t.text :overview
 
       t.timestamps
     end
