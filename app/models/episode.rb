@@ -18,7 +18,7 @@
 class Episode < ActiveRecord::Base
   attr_accessible :tvdb_id, :imdb_id, :name, :season_num, :episode_num, :first_aired, :overview
   validates :tv_show_id, presence: true
-  validates :name, presence: true, length: { maximum: 100 }
+  validates :name, presence: true, length: { maximum: 200 }
   validates :season_num, presence: true, length: { maximum: 4 }
   validates :episode_num, presence: true, length: { maximum: 5 }
   
