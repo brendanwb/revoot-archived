@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130411175838) do
     t.string   "season_num"
     t.string   "episode_num"
     t.string   "first_aired"
-    t.string   "overview"
+    t.text     "overview"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
