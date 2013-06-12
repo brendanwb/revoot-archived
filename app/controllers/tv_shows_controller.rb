@@ -1,6 +1,6 @@
 class TvShowsController < ApplicationController
   def index
-  	@tv_shows  = TvShow.all.sort_by { |obj| obj.name }
+    @tv_shows  = TvShow.all.sort_by { |obj| obj.name }
   end
 
   def show

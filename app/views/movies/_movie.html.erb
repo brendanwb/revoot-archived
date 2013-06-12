@@ -1,5 +1,5 @@
 <div class="title-list">
 	<% $movie = movie %>
-  <span class="floating-button"><%= render 'follow_movie_form' if signed_in? %></span>
+  <span class="floating-button"><%= render 'movies/follow_movie_form' if signed_in? %></span>
   <span class="floating-title"><%= link_to movie.title, movie_path(movie.id) %></span>
 </div>

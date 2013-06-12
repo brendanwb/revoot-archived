@@ -25,6 +25,14 @@ class Movie < ActiveRecord::Base
 
   has_many :users, through: :movie_trackers
   has_many :movie_trackers, dependent: :destroy
+
+  def search(query)
+  	if query
+      self.search query
+  	else
+      return "No results!"
+    end
+  end
   
 end
 

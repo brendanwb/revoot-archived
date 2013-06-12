@@ -1,21 +1,41 @@
-<% if signed_in? %>
+<% if @tv_search || @movie_search %>
 
-  <section>
-  	<%= link_to "Browse TV Shows", tv_path %>
-  </section>
-
-  <section>
-  	<%= link_to "Browse Movies", movies_path %>
-  </section>
+  <%= provide(:title, 'Search Results') %>
+  <div class="container search-results">
+  <h2>TV Shows :: <%= @tv_search.count %> found</h2>
+		<div class="align-center">
+			<%= render @tv_shows %>
+		</div>
+	</div> <!-- search-results -->
+  <div class="container search-results">
+	<h2>Movies :: <%= @movie_search.count %> found</h2>
+		<div class="align-center">
+      <%= render @movies %>
+    </div>
+  </div> <!-- search-results -->  
 
 <% else %>
-	<div class="center hero-unit">
-	  <h1>Welcome to Revoot</h1>
 
-	  <h2>
-		Easily track the movies and TV shows you've watched or plan to watch.
-	  </h2>
+  <% if signed_in? %>
 
-	  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-warning" %>
-	</div>
+    <section>
+  	  <%= link_to "Browse TV Shows", tv_path %>
+    </section>
+
+    <section>
+  	  <%= link_to "Browse Movies", movies_path %>
+    </section>
+
+  <% else %>
+
+	  <div class="center hero-unit">
+	    <h1>Welcome to Revoot</h1>
+
+	    <h2>Easily track the Movies and TV shows you've watched or plan to watch.</h2>
+
+	    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-warning" %>
+	  </div>
+
+  <% end %>
+
 <% end %>

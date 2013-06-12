@@ -1,5 +1,5 @@
 <div class="title-list">
 	<% $tv_show = tv_show %>
-	<span class="floating-button"><%= render 'follow_tv_show_form' if signed_in? %></span>
+	<span class="floating-button"><%= render 'tv_shows/follow_tv_show_form' if signed_in? %></span>
 	<span class="floating-title"><%= link_to tv_show.name, tv_show_page_path(tv_show.id) %></span>
 </div>

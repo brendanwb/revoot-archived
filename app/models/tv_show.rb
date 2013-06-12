@@ -22,6 +22,14 @@ class TvShow < ActiveRecord::Base
   has_many :episodes, dependent: :destroy
   has_many :tv_relationships, dependent: :destroy
   has_many :tv_show_followers, through: :tv_relationships, source: :user
+
+  def search(query)
+  	if query
+      self.search query
+    else
+    	return "You need to enter a search query!"
+  	end
+  end
   
 end
 

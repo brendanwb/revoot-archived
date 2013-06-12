@@ -3,8 +3,8 @@
 <% @movie ? $curr_movie = @movie : $curr_movie = $movie %>
 <div id="follow_form_<%= $curr_movie.id %>">
 	<% if current_user.following_movie?($curr_movie) %>
-	  <%= render 'unfollow_movie' %>
+	  <%= render 'movies/unfollow_movie' %>
   <% else %>
-  	<%= render 'follow_movie' %>
+  	<%= render 'movies/follow_movie' %>
 	<% end %>
 </div>

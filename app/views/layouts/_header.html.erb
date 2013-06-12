@@ -40,6 +40,12 @@
 <div id="title-bar-wrapper">
 	<div class="container">
 		<h2 class="page-name pull-left"><%= full_title(yield(:title)).split("| ").last == "Revoot" ? "" : full_title(yield(:title)).split("| ").last %></h2>
+    <%= form_tag root_path, :class => "form-search", :method => 'get' do %>
+      <p>
+        <%= text_field_tag :search, params[:search], :class => "input-large" %>
+        <%= submit_tag "Search", :class => "btn-small", :name => nil %>
+      </p>
+    <% end %>
   </div>
 </div>
 </header>
