@@ -4,6 +4,21 @@ body { padding-top: 60px; }
 
 @import "bootstrap-responsive";
 
+// Hover state
+.btn:hover {
+  color: $grayDark;
+}
+
+.btn-primary {
+  @include buttonBackground($primaryButtonBackground, $primaryButtonBackground);
+  background-color: $primaryButtonBackground;
+}
+
+// Success appears as green
+.btn-success {
+  @include buttonBackground(#62c462, #62c462);
+}
+
 /* mixins, variables, etc */
 $grayMediumLight: #eaeaea;
 $grayMidRange: #a3a3a7;
@@ -51,43 +66,33 @@ textarea {
 
 #title-bar-wrapper {
   height: 50px;
-  background-image: -moz-linear-gradient(top, #123456, #222222);
-  background-image: -ms-linear-gradient(top, #123456, #222222);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#123456), to(#222222));
-  background-image: -webkit-linear-gradient(top, #123456, #222222);
-  background-image: -o-linear-gradient(top, #123456, #222222);
-  background-image: linear-gradient(top, #123456, #222222);
+  background-color: $primaryButtonBackground;
 }
 
-.container>h2 {
-    float: left;
-    margin-left: 5px;
+.page-name {
+    margin-right: 10px;
+    margin-top: 5px;
     font-size: 1.7em;
     color: white;
-    /*text-transform: uppercase;*/
     letter-spacing: -1px;
     padding-top: 9px;
     font-weight: bold;
     line-height: 1;
-
 }
 
 .content-wrapper {
-  margin-top: 55px;
+  margin-top: 5%;
+  margin-right: auto;
+  margin-left: auto;
   padding-top: 15px;
+  width: 90%;
   background-color: $grayMediumLight;
 }
 
-.listing {
-  height: 20px;
-  margin-bottom: -9px;
-  /*border-bottom: 1px solid gray;*/
-}
-
 .title-list {
-  float: left;
+  float:left;
   min-width: 200px;
-  padding-left:70px;
+  padding-left:20px;
   font-weight: bold;
 }
 
@@ -96,7 +101,7 @@ textarea {
 }
 
 .season_header {
-  font-size: 20px;
+  font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 10px;
   border-bottom: 1px solid gray;
@@ -112,12 +117,13 @@ textarea {
 }
 
 .accordian-heading {
-  font-size: 15px;
+  font-size: 1.15em;
   border-bottom: 1px solid lightBlue;
+  min-width: 500px;
 }
 
 .floating-button {
-  float:left;
+  float: left;
   block:none;
   margin-top: -8px;
   max-height: 40px;
@@ -125,14 +131,14 @@ textarea {
 }
 
 .floating-title {
-  float:left;
+  float: left;
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   block:none;
   padding-left: 10px;
-  font-size: 15px;
-}
-
-.clear_all {
-  clear:both;
+  font-size: 1.15em;
 }
 
 /* typography */
@@ -308,4 +314,28 @@ input, textarea, select, .uneditable-input {
   border: 1px solid gray;
   background-color: $grayLighter;
   padding: 10px 0;
+}
+
+@media (max-width: 480px) {
+  .floating-title {
+    max-width: 200px;
+  }
+  .accordian-heading {
+    max-width: 330px;
+    padding-top: 20px;
+    margin-top:-8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .series-btn {
+    vertical-align: center;
+  }
+}
+
+@media (max-width: 980px) {
+  .page-name {
+    margin-left: 5px;
+  }
+
 }

@@ -1,7 +1,11 @@
 <% if signed_in? %>
 
   <section>
-  	<%= render 'shared/stats' %>
+  	<%= link_to "Browse TV Shows", tv_path %>
+  </section>
+
+  <section>
+  	<%= link_to "Browse Movies", movies_path %>
   </section>
 
 <% else %>
@@ -9,7 +13,7 @@
 	  <h1>Welcome to Revoot</h1>
 
 	  <h2>
-		Home to the Simple Movie/TV Show Tracker!  Easily track the movie's and TV shows you've watched or plan to watch.
+		Easily track the movies and TV shows you've watched or plan to watch.
 	  </h2>
 
 	  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-warning" %>

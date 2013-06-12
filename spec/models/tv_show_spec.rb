@@ -10,6 +10,9 @@
 #  genre      :string(255)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  overview   :text
+#  imdb_id    :string(255)
+#  runtime    :string(255)
 #
 
 require 'spec_helper'

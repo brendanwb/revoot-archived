@@ -1,8 +1,8 @@
 
 <% provide(:title, @name)%>
-<div class="row">
+<div class="row-fluid">
   <aside class="span4 info-box">
-
+    <%= render 'follow_tv_show_form' if signed_in? %>
       <p>
         <strong>Year: </strong><%= @year %>
       </p>
@@ -13,10 +13,10 @@
         <strong><%= @genre_count > 1 ? "Genres: " : "Genre: " %></strong><%= @genres %>
       </p>
       <p><strong>Overview: </strong><%= @tv_show.overview %></p>
-    <%= render 'follow_tv_show_form' if signed_in? %>
+
     <% if signed_in? %>
       <% if current_user.following_show?(@tv_show) %>
-        <%= link_to watched_entire_series_text(@tv_show), toggle_entire_show_episode_tracker_path(@tv_show), :class => "btn btn-primary" %>
+        <%= link_to watched_entire_series_text(@tv_show), toggle_entire_show_episode_tracker_path(@tv_show), :class => "btn btn-primary series-btn" %>
       <% end %>  
     <% end %>
   </aside><!-- <aside class="span4"> -->
@@ -28,4 +28,4 @@
     </div><!-- seasons -->
     <% end %>
   </section>
-</div><!-- <div class="row"> -->
+</div><!-- <div class="row-fluid"> -->

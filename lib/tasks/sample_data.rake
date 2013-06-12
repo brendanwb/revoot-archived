@@ -48,7 +48,7 @@ namespace :db do
                season_num  = ep[4]
                episode_num = ep[5]
                first_aired = ep[6]
-               overview    = ep[7].inspect
+               overview    = ep[7]
                tv_show.episodes.create!(tvdb_id: tvdb_id,
                                         imdb_id: imdb_id,
                                         name: name,
