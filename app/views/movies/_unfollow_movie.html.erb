@@ -1,4 +1,6 @@
 <%= form_for(current_user.movie_trackers.find_by_movie_id($curr_movie),
              html: { method: :delete }, remote: true) do |f| %>
-  <%= f.submit "-", class: "btn" %>
+  <%= button_tag( class: "btn btn-success") do %>
+    <i class="icon-ok icon-white"></i>
+  <% end %>
 <% end %>

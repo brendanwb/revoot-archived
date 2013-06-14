@@ -1,0 +1,12 @@
+        <div class="accordian-group">
+	      	<div class="accordian-heading">
+	      	<span class="floating-button episode-btn"><%= render 'episode_tracker_form' if signed_in? %></span>
+				  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= "#{episode_list.season_num}_#{episode_list.episode_num}" %>"><%= "#{episode_list.season_num}x#{episode_list.episode_num}" %><strong> <%= episode_list.name %></strong></a>
+				  </div> <!-- accordian-heading -->
+			    <div id="collapse<%= "#{episode_list.season_num}_#{episode_list.episode_num}" %>" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      	<strong>Episode Overview:</strong>
+              <%= episode_list.overview %>
+			      </div> <!-- accordion-inner -->
+			    </div> <!-- accordion-body -->
+		    </div> <!-- accordian-group -->

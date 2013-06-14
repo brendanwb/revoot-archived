@@ -1,4 +1,6 @@
 <%= form_for(current_user.movie_trackers.build(movie_id: $curr_movie.id), remote: true) do |f| %>
   <div><%= f.hidden_field :movie_id %></div>
-  <%= f.submit "+", class: "btn btn-small btn-primary" %>
+  <%= button_tag( class: "btn") do %>
+    <i class="icon-ok"></i>
+  <% end %>
 <% end %>

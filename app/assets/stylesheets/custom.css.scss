@@ -19,6 +19,10 @@ body { padding-top: 60px; }
   @include buttonBackground(#62c462, #62c462);
 }
 
+.btn-small {
+  @include buttonBackground(lightgray, lightgray);
+}
+
 /* mixins, variables, etc */
 $grayMediumLight: #eaeaea;
 $grayMidRange: #a3a3a7;
@@ -103,9 +107,11 @@ textarea {
 
 .title-list {
   float:left;
-  min-width: 200px;
-  padding-left:20px;
-  font-weight: bold;
+  width: 500px;
+  padding-left:30px;
+  margin-left: 20px;
+  margin-right:20px;
+  border-top: 1px dashed black;
 }
 
 .info-box {
@@ -119,6 +125,10 @@ textarea {
   border-bottom: 1px solid gray;
 }
 
+.season-btn {
+  margin-top: -3px;
+}
+
 .episode-list {
   text-decoration: none;
   float: left;
@@ -130,27 +140,23 @@ textarea {
 
 .accordian-heading {
   font-size: 1.15em;
-  border-bottom: 1px solid lightBlue;
-  min-width: 500px;
+  border-bottom: 1px dashed gray;
+  width: 670px;
 }
 
 .floating-button {
-  float: left;
+  float: right;
   block:none;
-  margin-top: -8px;
   max-height: 40px;
-  padding-right: 10px;
 }
 
 .floating-title {
   float: left;
-  max-width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  block:none;
-  padding-left: 10px;
-  font-size: 1.15em;
+  font-weight: bold;
+}
+
+.episode-btn {
+  margin-top: -8px;
 }
 
 /* typography */
@@ -335,14 +341,37 @@ input, textarea, select, .uneditable-input {
   padding: 10px 0;
 }
 
-@media (max-width: 480px) {
+/*@media (max-width: 320px) {
   .floating-title {
-    max-width: 200px;
+
+  }
+}*/
+
+@media (max-width: 480px) {
+  .title-list {
+    width:300px;
+    margin-left: 10px;
+  }
+
+  .season_header {
+    margin-top: 20px;
+  }
+  .episode-btn {
+    margin-top:-2px;
+  }
+
+  .floating-title {
+    min-width: 150px;
+    max-width: 230px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    block:none;
+    font-size: 1.15em;
   }
   .accordian-heading {
     max-width: 330px;
     padding-top: 20px;
-    margin-top:-8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -350,6 +379,15 @@ input, textarea, select, .uneditable-input {
   .series-btn {
     vertical-align: center;
   }
+
+  .form-search {
+    position: absolute;
+    top: -2px;
+    right: 55px;
+  }
+
+  .input-large { width: 175px; }
+
 }
 
 @media (max-width: 980px) {
