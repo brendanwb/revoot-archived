@@ -139,7 +139,7 @@ textarea {
 .accordian-heading {
   font-size: 1.15em;
   border-bottom: 1px dashed gray;
-  width: 670px;
+  width: 100%;
 }
 
 .floating-button {
@@ -339,16 +339,10 @@ input, textarea, select, .uneditable-input {
   padding: 10px 0;
 }
 
-/*@media (max-width: 320px) {
-  .floating-title {
-
-  }
-}*/
-
 @media (max-width: 480px) {
   .title-list {
-    width:300px;
-    margin-left: 10px;
+    width:100%;
+    margin-left: 0px;
   }
 
   .season_header {
@@ -359,13 +353,11 @@ input, textarea, select, .uneditable-input {
   }
 
   .floating-title {
-    min-width: 150px;
-    max-width: 230px;
+    width: 75%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     block:none;
-    font-size: 1.15em;
   }
   .accordian-heading {
     max-width: 330px;
@@ -379,12 +371,12 @@ input, textarea, select, .uneditable-input {
   }
 
   .form-search {
-    position: absolute;
-    top: -2px;
-    right: 55px;
+    float: right;
+    margin-top: -35px;
+    margin-right: 10px;
   }
 
-  .input-large { width: 175px; }
+  .input-large { width: 50%; }
 
 }
 
