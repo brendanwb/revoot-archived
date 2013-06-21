@@ -13,6 +13,7 @@ class TvShowsController < ApplicationController
     @genre_count = genres.length
     @genres      = genres.join(", ")
   	@seasons     = @tv_show.episodes
+    @episode_list = @tv_show.episodes
   end
 
   def tv_show_followers

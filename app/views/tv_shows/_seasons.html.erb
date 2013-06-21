@@ -1,41 +1,28 @@
-
-    <% $curr_episode = seasons %>
-    <div class="episode-list">
- 		<% if $current_season != seasons.season_num %>
- 		  <div class="season_header row">
-			  Season: <%= seasons.season_num %>
-			<% $current_season = seasons.season_num %>
-			<% if signed_in? %>
-				<% if current_user.following_show?(@tv_show) %>
-				  <%= link_to watched_entire_season_text(@tv_show,$current_season), toggle_watched_season_episode_tracker_path(@tv_show,:season => $current_season), :class => "btn btn-small season-btn" %>
-				<% end %>
-			<% end %>
-		  </div>
-        <div class="accordian-group">
-	      	<div class="accordian-heading">
-	      	<span class="floating-button episode-btn"><%= render 'episode_tracker_form' if signed_in? %></span>
-				  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= "#{seasons.season_num}_#{seasons.episode_num}" %>"><%= "#{seasons.season_num}x#{seasons.episode_num}" %><strong> <%= seasons.name %></strong></a>
-				  </div> <!-- accordian-heading -->
-			    <div id="collapse<%= "#{seasons.season_num}_#{seasons.episode_num}" %>" class="accordion-body collapse">
-			      <div class="accordion-inner">
-			      	<strong>Episode Overview:</strong>
-              <%= seasons.overview %>
-			      </div> <!-- accordion-inner -->
-			    </div> <!-- accordion-body -->
-		    </div> <!-- accordian-group -->
-		<% else %>
-        <div class="accordian-group">
-	      	<div class="accordian-heading">
-	      	<span class="floating-button episode-btn"><%= render 'episode_tracker_form' if signed_in? %></span>
-				  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= "#{seasons.season_num}_#{seasons.episode_num}" %>"><%= "#{seasons.season_num}x#{seasons.episode_num}" %><strong> <%= seasons.name %></strong></a>
-				  </div> <!-- accordian-heading -->
-			    <div id="collapse<%= "#{seasons.season_num}_#{seasons.episode_num}" %>" class="accordion-body collapse">
-			      <div class="accordion-inner">
-			      	<strong>Episode Overview:</strong>
-              <%= seasons.overview %>
-			      </div> <!-- accordion-inner -->
-			    </div> <!-- accordion-body -->
-		    </div> <!-- accordian-group -->
-			<% $current_season = seasons.season_num %>
+<% $curr_episode = seasons %>
+<div class="episode-list">
+	<% if $current_season != seasons.season_num %>
+	  <div class="season_header row">
+	  Season: <%= seasons.season_num %>
+	<% $current_season = seasons.season_num %>
+	<% if signed_in? %>
+		<% if current_user.following_show?(@tv_show) %>
+		  <%= link_to watched_entire_season_text(@tv_show,$current_season), toggle_watched_season_episode_tracker_path(@tv_show,:season => $current_season), :class => "btn btn-small season-btn" %>
 		<% end %>
-		</div> <!-- episodes_list -->
+	<% end %>
+  </div>
+<% else %>
+	<% $current_season = seasons.season_num %>
+<% end %>
+  <div class="accordian-group">
+  	<div class="accordian-heading">
+  	<span class="floating-button episode-btn"><%= render 'episode_tracker_form' if signed_in? %></span>
+	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= "#{seasons.season_num}_#{seasons.episode_num}" %>"><%= "#{seasons.season_num}x#{seasons.episode_num}" %><strong> <%= seasons.name %></strong></a>
+	  </div> <!-- accordian-heading -->
+    <div id="collapse<%= "#{seasons.season_num}_#{seasons.episode_num}" %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+      	<strong>Episode Overview:</strong>
+        <%= seasons.overview %>
+      </div> <!-- accordion-inner -->
+    </div> <!-- accordion-body -->
+  </div> <!-- accordian-group -->
+</div> <!-- episodes_list -->
