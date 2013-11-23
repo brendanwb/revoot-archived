@@ -14,7 +14,7 @@ Frosty the Snowman
 Home Alone
 Die Hard
 A Christmas Carol
-A Muppet Christmas Carol
+The Muppet Christmas Carol
 Little Women
 Scrooged
 Nightmare Before Christmas
@@ -32,3 +32,13 @@ Taken
 Pulp Fiction
 Skyfall
 The Avengers
+Afternoon Delight
+Pacific Rim
+The Wolverine
+Ain't Them Bodies Saints
+Before Midnight
+Before Sunset
+Before Sunrise
+The Assassination of Jesse James by the Coward Robert Ford
+Upstream Color
+Primer

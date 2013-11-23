@@ -75,7 +75,8 @@ namespace :db do
     user  = User.first
     tv_shows.each { |followed| user.follow_show!(followed) }
 
-    CSV.open("#{TMdbDir}Movie_Pull.csv","r").each do |movie|
+    File.open("#{TMdbDir}Movie_Pull.csv","r").each do |mv|
+      movie        = mv.split("~")
       tmdb_id      = movie[0]
       imdb_id      = movie[1]
       title        = movie[2]

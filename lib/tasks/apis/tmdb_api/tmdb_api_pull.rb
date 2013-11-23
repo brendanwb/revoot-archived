@@ -15,12 +15,13 @@ Tmdb.default_language = "en"
 File.open("#{WorkingDir}Movies_List.txt", "r").each do |movie|
 	@movie = TmdbMovie.find(:title => "#{movie}", :limit => 1)
 	# => <OpenStruct>
-
+  unless @movie.nil?
 	language = @movie.spoken_languages
 
 
-  File.open("#{WorkingDir}Movie_Pull.csv", "a") do |file|
-  	# file.puts "#{@movie.id},\"#{@movie.imdb_id}\",\"#{@movie.title}\",\"#{@movie.release_date}\",\"#{@movie.overview}\",\"#{@movie.status}\",#{@movie.run_time},\"#{@movie.production_companies}\",\"#{@movie.spoken_languages}\",\"#{@movie.genres}\""
-  	file.puts "#{@movie.id},\"#{@movie.imdb_id}\",\"#{@movie.title}\",\"#{@movie.release_date}\",\"#{@movie.overview}\""
+    File.open("#{WorkingDir}Movie_Pull.csv", "a") do |file|
+  	  # file.puts "#{@movie.id}~\"#{@movie.imdb_id}\"~\"#{@movie.title}\"~\"#{@movie.release_date}\"~\"#{@movie.overview}\"~\"#{@movie.status}\"~#{@movie.run_time}~\"#{@movie.production_companies}\"~\"#{@movie.spoken_languages}\"~\"#{@movie.genres}\""
+  	  file.puts "#{@movie.id}~\"#{@movie.imdb_id}\"~\"#{@movie.title}\"~\"#{@movie.release_date}\"~\"#{@movie.overview}\""
+    end
   end
 end
