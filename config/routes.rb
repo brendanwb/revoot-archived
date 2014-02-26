@@ -29,6 +29,7 @@ RevootApp::Application.routes.draw do
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
+  match '/timeyWimey', to: 'static_pages#timey_wimey'
   match '/signup',  to: 'users#new'
   # match ':name', to: 'users#show', as: 'user_page'
   match '/signin',  to: 'sessions#new'
