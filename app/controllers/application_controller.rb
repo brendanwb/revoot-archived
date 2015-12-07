@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
   end
 
   def something
-    'true'
+    "true"
+  end
+
+  def method_test
+    variable(
+      some,
+      stuff,
+      into,
+    )
   end
 end
