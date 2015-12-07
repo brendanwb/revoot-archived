@@ -33,6 +33,10 @@
     "level": "ignore",
     "value": "unix"
   },
+  "max_line_length": {
+    "level": "ignore",
+    "value": 80
+  },
   "missing_fat_arrows": {
     "level": "ignore"
   },
