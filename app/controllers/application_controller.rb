@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
 
   def method_test
     variable(
-      some, thing, here,
-      stuff,
-      into,
+      :some, :thing, :here,
+      :stuff,
+      :into,
     )
   end
 end
