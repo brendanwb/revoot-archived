@@ -137,6 +137,8 @@ Metrics/ModuleLength:
   Max: 100
   Description: Avoid modules longer than 100 lines of code.
   Enabled: false
+Metrics/LineLength:
+  Max: 99
 Metrics/CyclomaticComplexity:
   Description: A complexity metric that is strongly correlated to the number of test
     cases needed to validate a method.
