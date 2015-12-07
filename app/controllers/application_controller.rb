@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
   def this_is_a_really_really_really_really_really_really_really_really_really_long_variable
     true
   end
+
+  def something
+    'true'
+  end
 end
