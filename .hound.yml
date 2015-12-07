@@ -1,2 +1,2 @@
 ruby:
-    enabled: true
+    config_file: .ruby-style.yml
